@@ -2,8 +2,11 @@
 require 'BD/conexion.php';
 require 'BD/mostrar_datos.php';
 if (isset($_GET['buscar'])) {
+  
   $buscar_id = $_GET['buscar']; // Obtener el ID que se va a buscar
-  $query = "SELECT * FROM control_aceites WHERE id = ?";
+  $buscar_opc = $_GET['opciones'];
+  echo($buscar_opc);
+  $query = "SELECT * FROM control_aceites WHERE $buscar_opc = ?";
   $stmt = $conn->prepare($query);
   $stmt->bind_param("i", $buscar_id); // Vincular el parámetro
   $stmt->execute();
@@ -46,9 +49,15 @@ if (isset($_GET['buscar'])) {
         
         <button type="submit" class="btn btn-primary mt-3">AGREGAR</button>
       </form>
-      <form method="POST" action="BD/buscar.php">
-    <label for="buscar">Buscar por ID:</label>
-    <input type="number" id="buscar" name="buscar" required>
+      <form method="GET" action="">
+    <label for="buscar">Buscar por</label>
+    <select name="opciones" id="opciones" required>
+      <option value="Fecha" >fecha</option>
+      <option value="Moto_Num" >moto</option>
+      <option value="id" >folio</option>
+
+
+    <input type="input" id="buscar" name="buscar" required>
     <input type="submit" value="Buscar">
 </form>
 
