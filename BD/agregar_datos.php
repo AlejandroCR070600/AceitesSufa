@@ -18,7 +18,7 @@ $sql="INSERT INTO control_aceites(Fecha, Moto_Num, Cant_Aceites, Cant_Motos) VAL
 
   if ($conn->query($sql) === TRUE) {
     echo "Datos guardados correctamente.";
-    header("Location: /ejemplo/ejemplo.php");
+    header("Location: /AceitesSufa/index.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
         if ($conn->query($sql) === TRUE) {
             echo "Registro eliminado correctamente.";
             // Redirigir a otra página
-            header("Location: /ejemplo/ejemplo.php");
+            header("Location: /AceitesSufa/index.php");
             exit(); // Detener la ejecución del script
         } else {
             echo "Error al eliminar el registro: " . $conn->error;

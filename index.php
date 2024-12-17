@@ -19,6 +19,11 @@ require 'BD/mostrar_datos.php';
     
     <!-- Columna para el formulario -->
     <div class="col-md-2">
+    <form method="POST" action="BD/buscar.php">
+    <label for="buscar">Buscar por ID:</label>
+    <input type="number" id="buscar" name="buscar" required>
+    <input type="submit" value="Buscar">
+</form>
       <form method="POST" action="BD/agregar_datos.php" class="form-group">
         <label>Fecha</label>
         <input type="date" id="fecha" name="fecha" class="form-control bg-light text-muted">
@@ -34,16 +39,12 @@ require 'BD/mostrar_datos.php';
         
         <button type="submit" class="btn btn-primary mt-3">AGREGAR</button>
       </form>
-      <form method="POST" action="BD/buscar.php">
-    <label for="buscar">Buscar por ID:</label>
-    <input type="number" id="buscar" name="buscar" required>
-    <input type="submit" value="Buscar">
-</form>
+    
 
     </div>
 
     <!-- Columna para la tabla -->
-    <div class="col-md-6 table-responsive p-0 m-0" style="max-height: 550px; overflow-y: auto;">
+    <div class="col-md-6 table-responsive p-0 m-0" style="max-height: 380px; overflow-y: auto;">
   
     <table class="table table-borderless table-hover m-0">
         <thead class="table-danger">
