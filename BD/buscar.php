@@ -1,14 +1,42 @@
 <?php
+require 'conexion.php';
 
-// Verifica si el formulario fue enviado por POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verifica si 'id' está presente y no está vacío
-    if (isset($_POST['id']) && !empty($_POST['id'])) {
-        $id = $_POST['id'];  // Obtener el valor de 'id' desde el formulario
-        echo "El ID recibido es: " . $id;  // Mostrar el valor recibido
-    } else {
-        echo "No se proporcionó un ID.";
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (isset($_GET['buscar'])) {
+        $id = $_GET['buscar'];
+        $sqlBuscar="SELECT * FROM control_aceites where id=$id ";
+        $result=$conn->query($sqlBuscar);
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr >";
+                echo "<td > ".$row['id']."---</td>";
+                echo "<td >".$row['Fecha']."---</td>";
+                echo "<td>".$row['Moto_Num']."---</td>";
+                echo "<td>".$row['Cant_Aceites']."---</td>";
+                echo "<td>".$row['Cant_Motos']."---</td>";
+                echo "<td>
+                        <a href='BD/eliminar.php?id=" . $row['id'] . "' onclick='return confirm(\"¿Estás seguro de eliminar este registro?\")'>
+                          <button class='btn btn-ligth btn-sm'>Eliminar</button>
+                        </a>
+                        <a href='BD/agregar_datosE.php?id=" . $row['id'] . "'>
+                          <button class='btn btn-ligth btn-sm'>Editar</button>
+                        </a>
+                      </td>";
+                echo "</tr>";
+            }
+        }
+        header("Location: /ejemplo/ejemplo.php");
+        
+
+
+        exit;
+        
+    
+        
     }
+ 
 }
+
 
 ?>
