@@ -36,6 +36,7 @@ function editar_datos($conn, $id){
 
     if ($conn->query($sqlE)=== TRUE){
         echo"datos actualizados";
+        header("Location: /AceitesSufa/index.php");
     }else{
         echo "error";
     }

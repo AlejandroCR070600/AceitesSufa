@@ -1,6 +1,18 @@
 <?php 
 require 'BD/conexion.php';
 require 'BD/mostrar_datos.php';
+if (isset($_GET['buscar'])) {
+  $buscar_id = $_GET['buscar']; // Obtener el ID que se va a buscar
+  $query = "SELECT * FROM control_aceites WHERE id = ?";
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param("i", $buscar_id); // Vincular el parámetro
+  $stmt->execute();
+  $result = $stmt->get_result(); // Obtener los resultados de la búsqueda
+} else {
+  // Si no hay búsqueda, mostrar todos los registros
+  $query = "SELECT * FROM control_aceites"; // Cambia 'tu_tabla' al nombre real de tu tabla
+  $result = $conn->query($query); 
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,20 +22,15 @@ require 'BD/mostrar_datos.php';
     <title>Aceites Sufacen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color: #373E40;">
 
 <!-- Contenedor principal centrado -->
 <section class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
   <!-- Fila que contiene dos columnas -->
-  <div class="row w-100 justify-content-center ">
-    
+  <div class="row w-100 justify-content-center  ">
+
     <!-- Columna para el formulario -->
     <div class="col-md-2">
-    <form method="POST" action="BD/buscar.php">
-    <label for="buscar">Buscar por ID:</label>
-    <input type="number" id="buscar" name="buscar" required>
-    <input type="submit" value="Buscar">
-</form>
       <form method="POST" action="BD/agregar_datos.php" class="form-group">
         <label>Fecha</label>
         <input type="date" id="fecha" name="fecha" class="form-control bg-light text-muted">
@@ -39,12 +46,16 @@ require 'BD/mostrar_datos.php';
         
         <button type="submit" class="btn btn-primary mt-3">AGREGAR</button>
       </form>
-    
+      <form method="POST" action="BD/buscar.php">
+    <label for="buscar">Buscar por ID:</label>
+    <input type="number" id="buscar" name="buscar" required>
+    <input type="submit" value="Buscar">
+</form>
 
     </div>
 
     <!-- Columna para la tabla -->
-    <div class="col-md-6 table-responsive p-0 m-0" style="max-height: 380px; overflow-y: auto;">
+    <div class="col-md-6 table-responsive p-0 m-0" style="max-height: 550px; overflow-y: auto;">
   
     <table class="table table-borderless table-hover m-0">
         <thead class="table-danger">
@@ -57,24 +68,23 @@ require 'BD/mostrar_datos.php';
             <th>ACCIONES</th>
           </tr>
         </thead>
-        <tbody class="table-bordered">
-          <?php
-  
+        <tbody class="table-bordered table-dark text-white">
 
+          <?php
           if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
-                  echo "<tr >";
-                  echo "<td > ".$row['id']."</td>";
-                  echo "<td >".$row['Fecha']."</td>";
+                  echo "<tr>";
+                  echo "<td>".$row['id']."</td>";
+                  echo "<td>".$row['Fecha']."</td>";
                   echo "<td>".$row['Moto_Num']."</td>";
                   echo "<td>".$row['Cant_Aceites']."</td>";
                   echo "<td>".$row['Cant_Motos']."</td>";
                   echo "<td>
                           <a href='BD/eliminar.php?id=" . $row['id'] . "' onclick='return confirm(\"¿Estás seguro de eliminar este registro?\")'>
-                            <button class='btn btn-ligth btn-sm'>Eliminar</button>
+                            <button class='btn btn-dark btn-sm'>Eliminar</button>
                           </a>
                           <a href='BD/agregar_datosE.php?id=" . $row['id'] . "'>
-                            <button class='btn btn-ligth btn-sm'>Editar</button>
+                            <button class='btn btn-dark btn-sm'>Editar</button>
                           </a>
                         </td>";
                   echo "</tr>";
@@ -91,9 +101,7 @@ require 'BD/mostrar_datos.php';
 <!-- Script para establecer la fecha del día automáticamente -->
 <script>
   window.onload = function() {
-    // Obtiene la fecha actual en formato YYYY-MM-DD
     var today = new Date().toISOString().split('T')[0];
-    // Asigna la fecha al input de tipo date
     document.getElementById('fecha').value = today;
   }
 </script>
@@ -105,11 +113,11 @@ require 'BD/mostrar_datos.php';
         background: #f1f1f1; /* Color del fondo del scroll */
     }
     .table-responsive::-webkit-scrollbar-thumb {
-        background: #f8d7da; /* Color del scroll */
+        background:rgb(177, 177, 177); /* Color del scroll */
         border-radius: 4px; /* Redondeo del scroll */
     }
     .table-responsive::-webkit-scrollbar-thumb:hover {
-        background: #f8d7da; /* Color del scroll al pasar el mouse */
+        background:rgb(255, 255, 255); /* Color del scroll al pasar el mouse */
     }
 </style>
 
