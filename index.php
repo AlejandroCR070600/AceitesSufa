@@ -49,49 +49,53 @@ if (isset($_GET['opciones'])) {
     <title>Aceites Sufacen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body style="background-color: #373E40;">
+<body style="background-color: #373E40;" class="flex-column ustify-content-center align-items-center">
+
 
 <!-- Contenedor principal centrado -->
-<section class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+<section class="container-fluid flex-column justify-content-center align-items-center border" style="min-height: 100vh;">
+ <h1>hola</h1>
   <!-- Fila que contiene dos columnas -->
-  <div class="row w-100 justify-content-center  ">
+  <div class="w-100 d-flex justify-content-center align-items-center ">
 
     <!-- Columna para el formulario -->
-    <div class="col-md-2">
-      <form method="POST" action="BD/agregar_datos.php" class="form-group">
-        <label>Fecha</label>
-        <input type="date" id="fecha" name="fecha" class="form-control bg-light text-muted">
-        
-        <label>Numero Moto</label>
-        <input type="number" id="Num_moto" name="Num_Moto" class="form-control bg-light text-muted">
-        
-        <label>Aceites</label>
-        <input type="number" id="Aceites" name="Aceites" class="form-control bg-light text-muted">
-        
-        <label>Cantidad de motos</label>
-        <input type="number" id="Cant_Motos" name="Cant_Motos" class="form-control bg-light text-muted">
-        
-        <button type="submit" class="btn btn-primary mt-3">AGREGAR</button>
-      </form>
-      <form method="GET" action="">
-    <label for="buscar">Buscar por</label>
-    <select name="opciones" id="opciones" required>
+    <div class="col-md-2 bg-dark p-3 text-white me-5 rounded d-flex flex-column align-items-center justify-content-center">
+
+    <form method="GET" action="" class="form-group">
+    <label for="buscar" class="form-label mb-2">Buscar por</label>
+    <select name="opciones" id="opciones" required class="form-select-sm">
       <option value="Fecha" >fecha</option>
       <option value="Moto_Num" >moto</option>
       <option value="id" >folio</option>
 
 
-    <input type="input" id="buscar" name="buscar" >
-    <input type="submit" value="Buscar">
+    <input type="input" id="buscar" name="buscar" class="form-control" >
+    <input type="submit" value="Buscar" class="btn btn-primary mt-3 form-control">
 </form>
+      <form method="POST" action="BD/agregar_datos.php" class="form-group ">
+        <label>Fecha</label>
+        <input type="date" id="fecha" name="fecha" class="form-control bg-light text-muted" required>
+        
+        <label>Numero Moto</label>
+        <input type="number" id="Num_moto" name="Num_Moto" class="form-control bg-light text-muted" required>
+        
+        <label>Aceites</label>
+        <input type="number" id="Aceites" name="Aceites" class="form-control bg-light text-muted" required>
+        
+        <label>Cantidad de motos</label>
+        <input type="number" id="Cant_Motos" name="Cant_Motos" class="form-control bg-light text-muted" required>
+        
+        <button type="submit" class="btn btn-primary mt-3 form-control">AGREGAR</button>
+      </form>
+    
 
     </div>
 
     <!-- Columna para la tabla -->
-    <div class="col-md-6 table-responsive p-0 m-0" style="max-height: 550px; overflow-y: auto;">
+    <div class="col-md-6 table-responsive p-0 m-0 rounded" style="max-height: 550px; overflow-y: auto;">
   
-    <table class="table table-borderless table-hover m-0">
-        <thead class="table-danger">
+    <table class="table table-borderless table-hover m-0 ">
+        <thead class="table-dark">
           <tr>
             <th>ID</th>
             <th>FECHA</th>
