@@ -18,6 +18,7 @@ function agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_S
     if ($aceites_Stock > 0) {
         $sql = "INSERT INTO control_aceites (Fecha, Moto_Num, Cant_Aceites) VALUES ('$fecha', $num_moto, $aceites)";
         $sqlIngresar = "INSERT INTO aceites_Stock (Cant_Aceites, Fecha_Aceites, Entrada, Salida) VALUES ($formulaR, '$fecha', 0, $aceites)";
+        
 
         if ($conn->query($sql) === TRUE) {
             if ($conn->query($sqlIngresar)) {

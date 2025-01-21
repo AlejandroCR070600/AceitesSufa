@@ -106,7 +106,8 @@ if (isset($_GET['opciones'])) {
     <div class="col-md-6 table-responsive p-0 m-0 rounded" >
     <?php echo"<h2 style='color:white;'>".$aceites_Stock."</h2>"; ?>
     <?php
-session_start(); // Inicia la sesión
+    
+// Inicia la sesión
 
 if (isset($_SESSION['mensaje'])) {
     echo "<script>alert('" . $_SESSION['mensaje'] . "');</script>";
@@ -153,7 +154,7 @@ if (isset($_SESSION['mensaje'])) {
       ?>
     </tbody>
   </table>
-
+  <a href="/AceitesSufa/pdf/generador_PDF.php">DESCARGAR INFORME</a>
 </div>
     </div>
 
