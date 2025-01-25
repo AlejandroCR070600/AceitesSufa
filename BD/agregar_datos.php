@@ -3,6 +3,9 @@ session_start(); // Inicia la sesión
 
 require 'conexion.php';
 require 'aceites_Disponibles.php';
+require '../excel/datosExcel.php';
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fecha = $_POST['fecha'];
@@ -10,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $aceites = $_POST['Aceites'];
     $formulaR = $aceites_Stock - $aceites;
     agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock);
+    
 }
 
 function agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock){
@@ -22,6 +26,7 @@ function agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_S
 
         if ($conn->query($sql) === TRUE) {
             if ($conn->query($sqlIngresar)) {
+                datosExcel();
                 $_SESSION['mensaje'] = "Datos guardados correctamente.";
                 header("Location: /AceitesSufa/index.php");
                 exit;

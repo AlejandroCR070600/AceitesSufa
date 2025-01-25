@@ -50,19 +50,33 @@ if (isset($_GET['opciones'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aceites Sufacen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .form-container {
+            display: none; /* Ocultar formularios inicialmente */
+            
+        }
+        #form1 {
+            display: block;
+        }
+    </style>
 </head>
+
 <body style="background-color: #373E40;" class="flex-column ustify-content-center align-items-center">
 
 
 <!-- Contenedor principal centrado -->
-<section class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+<section class="container d-flex border justify-content-center align-items-center " style="min-height: 100vh;">
  
   <!-- Fila que contiene dos columnas -->
-  <div class="w-100 d-flex justify-content-center align-items-center">
+  <div class=" d-flex ">
+  
 
     <!-- Columna para el formulario -->
-    <div class="col-md-2 bg-dark p-3 text-white me-5 rounded d-flex flex-column align-items-center justify-content-center">
-    <form method="POST" action="BD/agregar_datos.php" class="mb-2">
+    <div class="" style="height: 300px" >
+ 
+    <div id="form1" class="form-container mt-4">
+      <form method="POST" action="BD/agregar_datos.php" class="mb-2">
           <label>Fecha</label>
           <input type="date" id="fecha" name="fecha" class="form-control bg-light text-muted" required>
           
@@ -76,14 +90,19 @@ if (isset($_GET['opciones'])) {
           
           <button type="submit" class="btn btn-primary form-control mt-2">AGREGAR</button>
       </form>
+    </div>
       
-      <form method="GET" action="BD/aceites_Disponibles.php"class="mb-2">
+    <div id="form2" class="form-container mt-4">
+        
+        <form method="GET" action="BD/aceites_Disponibles.php"class="mb-2">
         <label> ingresar aceites</label>
         <input type="number" name="ingresoAceites" id="ingresoAceites" class="form-control">
         <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="btn btn-primary  form-control mt-2">
-
-      </form>
+        </form>
+    </div>
       
+
+      <div id="form3" class="form-container mt-4">
 
       <form method="GET" action="" class="mb-2">
           <label for="buscar" class="form-label ">Buscar por</label>
@@ -96,6 +115,7 @@ if (isset($_GET['opciones'])) {
           <input type="input" id="buscar" name="buscar" class="form-control" >
           <input type="submit" value="BUSCAR" class="btn btn-primary  form-control mt-2">
       </form>
+      </div>
 
       
       
@@ -103,7 +123,12 @@ if (isset($_GET['opciones'])) {
     </div>
 
     <!-- Columna para la tabla -->
-    <div class="col-md-6 table-responsive p-0 m-0 rounded" >
+    <div class="" >
+    <div class="btn-group" role="group" aria-label="Formulario botones">
+            <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(1)">Entregar Aceites</button>
+            <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(2)">Agregar Aceites</button>
+            <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(3)">Buscar</button>
+      </div>
     <?php echo"<h2 style='color:white;'>".$aceites_Stock."</h2>"; ?>
     <?php
     
@@ -117,9 +142,9 @@ if (isset($_SESSION['mensaje'])) {
 
     
    
-<div style="height:550px; max-height: 550px; overflow-y: auto;">
+<div style="height:400px; max-height: 550px; overflow-y: auto;">
 
-<table class="table table-borderless table-hover m-0 " >
+<table class="table  table-dark" >
     <thead class="table-dark">
       <tr>
         <th>ID</th>
@@ -129,7 +154,7 @@ if (isset($_SESSION['mensaje'])) {
         <th>ACCIONES</th>
       </tr>
     </thead>
-    <tbody class="table-bordered table-dark text-white">
+    <tbody class="">
 
       <?php
       if ($result->num_rows > 0) {
@@ -154,7 +179,19 @@ if (isset($_SESSION['mensaje'])) {
       ?>
     </tbody>
   </table>
-  <a href="/AceitesSufa/pdf/generador_PDF.php">DESCARGAR INFORME</a>
+  
+</div>
+<div  class="container">
+
+<form method="POST" action="pdf/generador_PDF.php">
+      <label>Fecha de la factura</label>
+      <input id="select_Informe" name="select_Informe" type="DATE">
+      <input type="submit" name="submitInforme" value="DESCARGAR">
+
+
+</form>
+
+
 </div>
     </div>
 
@@ -168,6 +205,15 @@ if (isset($_SESSION['mensaje'])) {
     var today = new Date().toISOString().split('T')[0];
     document.getElementById('fecha').value = today;
   }
+  function mostrarFormulario(formId) {
+            // Ocultar todos los formularios
+            document.querySelectorAll('.form-container').forEach(function(form) {
+                form.style.display = 'none';
+            });
+
+            // Mostrar el formulario seleccionado
+            document.getElementById('form' + formId).style.display = 'block';
+        }
 </script>
 <style>
     .table-responsive::-webkit-scrollbar {
