@@ -1,6 +1,6 @@
 <?php
 require 'conexion.php'; // Conexión a la base de datos
-
+require '../excel/datosExcel.php';
 // Verificar si el ID ha sido recibido
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']); // Convertir el ID recibido a entero para mayor seguridad
@@ -15,6 +15,7 @@ if (isset($_GET['id'])) {
 
         // Ejecutar la consulta
         if ($conn->query($sql) === TRUE) {
+            eliminarDatosExcel($id);
             echo "Registro eliminado correctamente.";
             // Redirigir a otra página
             header("Location: /AceitesSufa/index.php");

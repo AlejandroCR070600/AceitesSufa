@@ -2,43 +2,40 @@
 // Iniciar sesión
 require "../BD/conexion.php"; // Archivo de conexión a la base de datos
 require('fpdf.php'); // Librería FPDF
-$FechaInforme = date("Y-m-d");
+date_default_timezone_set('America/Mexico_City');
 
-if (isset($_POST['submitInforme'])) {
-    if (isset($_POST['select_Informe'])) {
-        $FechaInforme = $_POST['select_Informe'];
-    }
+$FechaInforme = date("Y-m-d"); // Fecha actual por defecto
+
+if (isset($_POST['submitInforme']) && isset($_POST['select_Informe'])) {
+    $FechaInforme = $_POST['select_Informe']; // Fecha de inicio del informe
 }
 
-// Consulta para obtener las fechas de inicio y final del informe
-$sqlInforme = "SELECT * FROM informe WHERE inicio = ?";
+// 🔹 1️⃣ Obtener el ID del informe basado en la fecha de inicio
+$sqlInforme = "SELECT id FROM informe WHERE inicio = ?";
 $stmtInforme = $conn->prepare($sqlInforme);
-$stmtInforme->bind_param('s', $FechaInforme); // Usar la fecha del informe
+$stmtInforme->bind_param('s', $FechaInforme);
 $stmtInforme->execute();
 $resultInforme = $stmtInforme->get_result();
 
 if ($resultInforme->num_rows > 0) {
     $informe = $resultInforme->fetch_assoc();
-    $fechaInicio = $informe['inicio'];
-    $fechaFinal = $informe['final'];
-    $idInforme = $informe['id'];
+    $idInforme = $informe['id']; // Obtener el ID del informe
 } else {
-    die("No se encontró el informe con el ID proporcionado.");
+    die("No se encontró un informe con la fecha proporcionada.");
 }
 
-// Consulta para obtener los datos agrupados por Moto_Num
-$sql = "SELECT e.Moto_Num, SUM(e.Cant_Aceites) AS Total_Aceites 
-        FROM control_aceites e 
-        JOIN informe i ON e.Fecha BETWEEN i.inicio AND i.final 
-        WHERE i.inicio = ?
-        GROUP BY e.Moto_Num"; // Agrupar por el número de moto
+// 🔹 2️⃣ Obtener datos de `control_aceites` filtrando por `id_Informe`
+$sql = "SELECT Moto_Num, SUM(Cant_Aceites) AS Total_Aceites, SUM(precio) as Precio
+        FROM control_aceites 
+        WHERE id_Informe = ?
+        GROUP BY Moto_Num"; // Agrupar por Moto_Num
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('s', $FechaInforme); // Usar la fecha del informe
+$stmt->bind_param('i', $idInforme);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Crear el PDF
+// 🔹 3️⃣ Crear el PDF
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
@@ -46,22 +43,32 @@ $pdf->SetFont('Arial', 'B', 16);
 // Cabecera del reporte
 $pdf->Cell(180, 10, 'Reporte de Motos y Aceites', 0, 1, 'C');
 $pdf->SetFont('Arial', '', 12);
-
 $pdf->Ln(10); // Espaciado
 
+// Calculamos el ancho total de la tabla
+$anchoTotalTabla = 180; // 3 columnas de 60mm
+
+// Calculamos el espacio que debe haber a la izquierda para centrar la tabla
+$espacioIzquierda = (210 - $anchoTotalTabla) / 2; // 210mm es el ancho total de la página A4
+
+// Mover el cursor X a la posición centrada
+$pdf->SetX($espacioIzquierda);
+
+// Encabezados de la tabla
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Numero de Moto', 1, 0, 'C');
+$pdf->Cell(60, 10, 'Cantidad Total de Aceites', 1, 0, 'C');
+$pdf->Cell(60, 10, 'Gasto', 1, 1, 'C');
+
+// Iterar por cada fila y mostrar resultados
+$pdf->SetFont('Arial', '', 12);
 if ($result->num_rows > 0) {
-    // Encabezados de la tabla
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(90, 10, 'Numero de Moto', 1, 0, 'C');
-    $pdf->Cell(90, 10, 'Cantidad Total de Aceites', 1, 1, 'C');
-
-    // Iterar por cada fila y mostrar resultados
-    $pdf->SetFont('Arial', '', 12);
     while ($row = $result->fetch_assoc()) {
-        $pdf->Cell(90, 10, $row['Moto_Num'], 1, 0, 'C');
-        $pdf->Cell(90, 10, $row['Total_Aceites'], 1, 1, 'C');
+        $pdf->SetX($espacioIzquierda); // Volver a centrar cada fila
+        $pdf->Cell(60, 10, $row['Moto_Num'], 1, 0, 'C');
+        $pdf->Cell(60, 10, $row['Total_Aceites'], 1, 0, 'C');
+        $pdf->Cell(60, 10, "$".$row['Precio'], 1, 1, 'C');
     }
-
     // Generar el PDF para descarga
     $pdf->Output('D', 'Reporte_Motos.pdf');
 } else {
@@ -70,8 +77,9 @@ if ($result->num_rows > 0) {
     $pdf->Output('D', 'Reporte_Vacio.pdf');
 }
 
-// Cerrar conexión y declaración
+// 🔹 4️⃣ Cerrar conexiones
 $stmt->close();
 $stmtInforme->close();
 $conn->close();
+
 ?>
