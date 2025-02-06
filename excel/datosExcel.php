@@ -118,6 +118,8 @@ foreach ($dataFromDatabase as $row) {
     $sheet->setCellValue('B' . $rowIndex, $row['Fecha']);
     $sheet->setCellValue('C' . $rowIndex, $row['Moto_Num']);
     $sheet->setCellValue('D' . $rowIndex, $row['Cant_Aceites']);
+    $sheet->setCellValue('E' . $rowIndex, $row['precio']);
+    $sheet->setCellValue('F' . $rowIndex, $row['Folio']);
     $rowIndex++;
 }
 
@@ -146,6 +148,8 @@ if($result->num_rows>0){
         $sheet->setCellValue("B$ultimaFila",$row['Fecha']);
         $sheet->setCellValue("C$ultimaFila",$row['Moto_Num']);
         $sheet->setCellValue("D$ultimaFila",$row['Cant_Aceites']);
+        $sheet->setCellValue("E$ultimaFila",$row['precio']);
+        $sheet->setCellValue("F$ultimaFila",$row['id_']);
         $ultimaFila++;
     }
 

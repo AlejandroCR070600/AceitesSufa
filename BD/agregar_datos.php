@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fecha = $_POST['fecha'];
     $num_moto = $_POST['Num_Moto'];
     $aceites = $_POST['Aceites'];
-    $Precio= 93;
+    $Precio= 95;
     $formulaR = $aceites_Stock - $aceites;
     agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock, $Precio);
     

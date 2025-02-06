@@ -11,7 +11,7 @@ if (isset($_POST['submitInforme']) && isset($_POST['select_Informe'])) {
 }
 
 // 🔹 1️⃣ Obtener el ID del informe basado en la fecha de inicio
-$sqlInforme = "SELECT id FROM informe WHERE inicio = ?";
+$sqlInforme = "SELECT * FROM informe WHERE inicio = ?";
 $stmtInforme = $conn->prepare($sqlInforme);
 $stmtInforme->bind_param('s', $FechaInforme);
 $stmtInforme->execute();
@@ -42,6 +42,7 @@ $pdf->SetFont('Arial', 'B', 16);
 
 // Cabecera del reporte
 $pdf->Cell(180, 10, 'Reporte de Motos y Aceites', 0, 1, 'C');
+$pdf->Cell(180, 10,"folio: ". $informe['folio'], 0, 1, 'C');
 $pdf->SetFont('Arial', '', 12);
 $pdf->Ln(10); // Espaciado
 
