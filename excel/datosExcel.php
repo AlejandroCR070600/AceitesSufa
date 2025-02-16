@@ -119,13 +119,14 @@ foreach ($dataFromDatabase as $row) {
     $sheet->setCellValue('C' . $rowIndex, $row['Moto_Num']);
     $sheet->setCellValue('D' . $rowIndex, $row['Cant_Aceites']);
     $sheet->setCellValue('E' . $rowIndex, $row['precio']);
-    $sheet->setCellValue('F' . $rowIndex, $row['Folio']);
+    $sheet->setCellValue('F' . $rowIndex, $row['folio']);
     $rowIndex++;
 }
 
 // Guardar el archivo Excel actualizado
 $writer = new Xlsx($spreadsheet);
 $writer->save($nombreArchivo);
+agregarConsultaExcel();
 }
 
 
@@ -139,6 +140,7 @@ function agregarDatosExcel(){
 $spreadsheet=IOFactory::load($nombreArchivo);
 $sheet=$spreadsheet->getActiveSheet();
 $sql="SELECT * FROM control_aceites ORDER BY id DESC LIMIT 1";
+
 $result=$conn->query($sql);
 
 if($result->num_rows>0){
@@ -149,7 +151,7 @@ if($result->num_rows>0){
         $sheet->setCellValue("C$ultimaFila",$row['Moto_Num']);
         $sheet->setCellValue("D$ultimaFila",$row['Cant_Aceites']);
         $sheet->setCellValue("E$ultimaFila",$row['precio']);
-        $sheet->setCellValue("F$ultimaFila",$row['id_']);
+        $sheet->setCellValue("F$ultimaFila",$row['folio']);
         $ultimaFila++;
     }
 
@@ -160,6 +162,36 @@ if($result->num_rows>0){
 }else{
     echo"no hay datos en la base de datos";
 }
+}
+function agregarConsultaExcel() {
+    global $conn;
+    global $nombreArchivo;
+
+    // Ejecutar la consulta para obtener la información de la consulta agregada
+    $sql = "SELECT Moto_Num, COUNT(*) AS unico, SUM(precio) AS gasto FROM control_aceites GROUP BY Moto_Num";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $spreadsheet = IOFactory::load($nombreArchivo);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Encontrar la fila en la que debemos colocar los resultados de la consulta
+        $filaConsulta = 2; // Asumimos que la fila 2 es donde empiezan los resultados de la consulta.
+
+        // Escribir los resultados de la consulta en las columnas J, K y L
+        while ($row = $result->fetch_assoc()) {
+            $sheet->setCellValue("J$filaConsulta", $row['Moto_Num']);
+            $sheet->setCellValue("K$filaConsulta", $row['unico']);
+            $sheet->setCellValue("L$filaConsulta", $row['gasto']);
+            $filaConsulta++; // Mover a la siguiente fila
+        }
+
+        // Guardar el archivo Excel actualizado
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($nombreArchivo);
+    } else {
+        echo "No hay datos para la consulta.";
+    }
 }
 
 ?>

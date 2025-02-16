@@ -50,15 +50,25 @@ if (isset($_GET['opciones'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aceites Sufacen</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link href="./styles.css" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
       *{
         margin:none;
         padding:none;
       }
+      html, body {
+  height: 100%;  /* Establece la altura del html y body al 100% de la pantalla */
+  margin: 0;     /* Elimina el margen por defecto del body */
+  padding: 0;    /* Elimina el relleno por defecto */
+}
+     
+  
         .form-container {
             display: none; /* Ocultar formularios inicialmente */
+            border:2px solid black;
             
         }
         #form1 {
@@ -67,138 +77,131 @@ if (isset($_GET['opciones'])) {
     </style>
 </head>
 
-<body style="background-color: #373E40;" class="flex-column justify-content-center align-items-center">
+<body class="border   border-primary d-flex ">
 
 
 <!-- Contenedor principal centrado -->
-<section class="d-flex " style="min-height: 100vh;">
+<section class="container border border-danger align-items-center">
  
-  <!-- Fila que contiene dos columnas -->
-  <div class=" container-fluid border d-flex gap-5 flex-wrap justify-content-center align-items-center">
+
+  
+<div class="border border-secondary d-flex align-items-center">
+    <!-- Columna para el formulario -->
+    
+<div class="">
+
+<div class="container d-flex justify-content-center border btn-group" role="group" aria-label="Formulario botones">
+        <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(1)">Entregar Aceites</button>
+        <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(2)">Agregar Aceites</button>
+        <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(3)">Buscar</button>
+        <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(4)">Informe</button>
+  </div>
+
+
+  <form   id="form1" method="POST" action="BD/agregar_datos.php" class="form-container container">
+      <input type="date" id="fecha" name="fecha" class="mb-2 bg-primary form-control"required>
+      <input type="number" id="Aceites" name="Aceites" placeholder="ACEITES" class="mb-2 form-control" required>          
+       <input type="text" id="Num_moto" name="Num_Moto" placeholder="Numero de Moto" class="mb-2 form-control" required>
+      <button type="submit" class="">AGREGAR</button>
+  </form>
+
   
 
-    <!-- Columna para el formulario -->
-    <div class="p-3  text-white text-center bg-dark align-content-center rounded-3" style="height: 300px" >
- 
-    <div id="form1" class="form-container">
-      <form method="POST" action="BD/agregar_datos.php" class="d-flex flex-column">
-          <label>Fecha</label>
-          <input type="date" id="fecha" name="fecha" class="form-control form-control-sm rounded-5 bg-light text-muted" required>
-          
-          <label>Numero Moto</label>
-           <input type="number" id="Num_moto" name="Num_Moto" class="form-control form-control-sm rounded-5 bg-light text-muted" required>
-          
-          <label>Aceites</label>
-          <input type="number" id="Aceites" name="Aceites" class="form-control form-control-sm rounded-5 bg-light text-muted" required>
-          
-        
-          
-          <button type="submit" class="btn btn-primary  form-control-sm rounded-5 mt-2">AGREGAR</button>
-      </form>
-    </div>
-      
-    <div id="form2" class="form-container">
-        
-        <form method="GET" action="BD/aceites_Disponibles.php"class="">
-        <label> Ingresar Aceites</label>
-        <input type="number" name="ingresoAceites" id="ingresoAceites" class="form-control form-control-sm rounded-5 bg-light text-muted">
-        <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="btn btn-primary  form-control-sm rounded-5 mt-2">
-        </form>
-    </div>
-      
+    <form method="GET" action="BD/aceites_Disponibles.php" id="form2" class="form-container container">
+    <label> Ingresar Aceites</label>
+    <input type="number" name="ingresoAceites" id="ingresoAceites" class="form-control form-control-sm rounded-5 bg-light text-muted">
+    <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="btn btn-primary  form-control-sm rounded-5 mt-2">
+    </form>
 
-      <div id="form3" class="form-container">
+  
 
-      <form method="GET" action="" class="">
-          <label for="buscar" class="form-label ">Buscar por</label>
-          <select name="opciones" id="opciones" required class="form-select-sm">
+  
+    <form id="form3" class="form-container container" method="GET" action="" class="">
+        <label for="buscar" class="form-label ">Buscar por</label>
+        <select name="opciones" id="opciones" required class="form-select-sm">
             <option value="Fecha" >fecha</option>
             <option value="Moto_Num">Moto</option>
             <option value="id" >folio</option>
+        <input type="input" id="buscar" name="buscar" class="form-control form-control-sm rounded-5 bg-light text-muted" >
+        <input type="submit" value="BUSCAR" class="btn btn-primary  form-control-sm rounded-5 mt-2">
+    </form>
+  
 
+  
+  <form id="form4" class="form-container container" method="POST" action="pdf/generador_PDF.php">
+    <label>Fecha de la factura</label>
+    <input id="select_Informe" name="select_Informe" type="DATE" class="form-control form-control-sm rounded-5 bg-light text-muted">
+    <input type="submit" name="submitInforme" value="DESCARGAR" class="btn btn-primary  form-control-sm rounded-5 mt-2">
+  </form>
 
-          <input type="input" id="buscar" name="buscar" class="form-control form-control-sm rounded-5 bg-light text-muted" >
-          <input type="submit" value="BUSCAR" class="btn btn-primary  form-control-sm rounded-5 mt-2">
-      </form>
-      </div>
+  
+  
 
-      <div id="form4" class="form-container">
-      <form method="POST" action="pdf/generador_PDF.php">
-        <label>Fecha de la factura</label>
-        <input id="select_Informe" name="select_Informe" type="DATE" class="form-control form-control-sm rounded-5 bg-light text-muted">
-        <input type="submit" name="submitInforme" value="DESCARGAR" class="btn btn-primary  form-control-sm rounded-5 mt-2">
-      </form>
 </div>
-      
-      
 
-    </div>
+<!-- Columna para la tabla -->
+<div class="col-6 " >
 
-    <!-- Columna para la tabla -->
-    <div class="col-6" >
-    <div class="container d-flex justify-content-center  btn-group" role="group" aria-label="Formulario botones">
-            <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(1)">Entregar Aceites</button>
-            <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(2)">Agregar Aceites</button>
-            <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(3)">Buscar</button>
-            <button type="button" class="btn btn-secondary" onclick="mostrarFormulario(4)">Informe</button>
-      </div>
-    <?php echo"<h2 class='fd-6 text-center' style='color:white;'>".$aceites_Stock."</h2>"; ?>
-    <?php
-    
+<?php echo"<h2 class='fd-6 text-center' style='color:white;'>".$aceites_Stock."</h2>"; ?>
+<?php
+
 // Inicia la sesión
 
 if (isset($_SESSION['mensaje'])) {
-    echo "<script>alert('" . $_SESSION['mensaje'] . "');</script>";
-    unset($_SESSION['mensaje']); // Elimina el mensaje después de mostrarlo
+echo "<script>alert('" . $_SESSION['mensaje'] . "');</script>";
+unset($_SESSION['mensaje']); // Elimina el mensaje después de mostrarlo
 }
 ?>
 
-    
-   
-<div class="rounded-3" style="height:400px; max-height: 550px; overflow-y: auto;">
 
-<table class="table table-sm table-hover table-dark ">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>FECHA</th>
-            <th>MOTO</th>
-            <th>ACEITES</th>
-            <th>ACCIONES</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>".$row['id']."</td>";
-                echo "<td>".$row['Fecha']."</td>";
-                echo "<td>".$row['Moto_Num']."</td>";
-                echo "<td>".$row['Cant_Aceites']."</td>";
-                echo "<td>
-                        <a href='BD/eliminar.php?id=" . $row['id'] . "' onclick='return confirm(\"¿Estás seguro de eliminar este registro?\")'>
-                            <button class='btn btn-dark btn-sm'>Eliminar</button>
-                        </a>
-                        <a href='BD/agregar_datosE.php?id=" . $row['id'] . "'>
-                            <button class='btn btn-dark btn-sm'>Editar</button>
-                        </a>
-                    </td>";
-                echo "</tr>";
-            }
+
+<div class="col-md-9" style=" max-height:500px; overflow-y: auto;">
+
+<table class="table table-sm table-hover table-dark " >
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>FECHA</th>
+        <th>MOTO</th>
+        <th>ACEITES</th>
+        <th>FOLIO</th>
+        <th>ACCIONES</th>
+    </tr>
+</thead>
+<tbody >
+    <?php
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>".$row['id']."</td>";
+            echo "<td>".$row['Fecha']."</td>";
+            echo "<td>".$row['Moto_Num']."</td>";
+            echo "<td>".$row['Cant_Aceites']."</td>";
+            echo "<td>".$row['folio']."</td>";
+            echo "<td>
+                    <a href='BD/eliminar.php?id=" . $row['id'] . "' onclick='return confirm(\"¿Estás seguro de eliminar este registro?\")'>
+                        <button class='btn btn-dark btn-sm'>Eliminar</button>
+                    </a>
+                    <a href='BD/agregar_datosE.php?id=" . $row['id'] . "'>
+                        <button class='btn btn-dark btn-sm'>Editar</button>
+                    </a>
+                </td>";
+            echo "</tr>";
         }
-        ?>
-    </tbody>
+    }
+    ?>
+</tbody>
 </table>
 
-  
+
 </div>
 <form method="post" action="excel/datosExcel.php">
-    <button type="submit" name="actualizar">Actualizar</button>
+<button type="submit" name="actualizar">Actualizar</button>
 </from>
-    </div>
+</div>
 
-  </div>
+</div>
+  
 </section>
 
 <!-- Script para establecer la fecha del día automáticamente -->

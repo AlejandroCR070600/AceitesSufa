@@ -17,24 +17,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 }
 
-function obtenerIdInforme($conn){
-    $sqlIdInfo="SELECT id FROM informe ORDER BY id DESC LIMIT 1";
-    $result=$conn->query($sqlIdInfo);
-    if($result->num_rows>0){
-        $row=$result->fetch_assoc();
-        $id_Informe=$row['id'];
-        return $id_Informe;
+function tablaInforme($conn) {
+    $sqlIdInfo = "SELECT * FROM informe ORDER BY id DESC LIMIT 1";
+    $result = $conn->query($sqlIdInfo);
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return ['id' => $row['id'], 'folio' => $row['folio']];
     }
 
-    
+    return null; // En caso de que no haya resultados
 }
 
 function agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock, $Precio){
 
     
     if ($aceites_Stock > 0) {
-        $id_Informe= obtenerIdInforme($conn);
-        $sql = "INSERT INTO control_aceites (Fecha, Moto_Num, Cant_Aceites, id_Informe, precio) VALUES ('$fecha', $num_moto, $aceites, $id_Informe, $Precio)";
+        $tablaInforme= tablaInforme($conn);
+        $id_Informe=$tablaInforme['id'];
+        $folio=$tablaInforme['folio'];
+        $sql = "INSERT INTO control_aceites (Fecha, Moto_Num, Cant_Aceites, id_Informe, precio , folio) VALUES ('$fecha', $num_moto, $aceites, $id_Informe, $Precio, '$folio')";
         $sqlIngresar = "INSERT INTO aceites_Stock (Cant_Aceites, Fecha_Aceites, Entrada, Salida) VALUES ($formulaR, '$fecha', 0, $aceites)";
         
 
