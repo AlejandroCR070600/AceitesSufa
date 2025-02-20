@@ -54,7 +54,7 @@ function cierreInforme($conn, $info) {
 
 
         if($aceites_Stock>0){
-            $aceites_Stock="Aceites disponibles: ".$rowA['Cant_Aceites'];
+            $aceites_Stock="ACEITES DISPONIBLES : ".$rowA['Cant_Aceites'];
             
         }else{
            if($aceites_Stock==0){
