@@ -4,7 +4,7 @@ if (isset($_GET['opciones'])) {
   $buscar_opc = $_GET['opciones']; // Columna por la que buscar
 
   // Lista blanca de columnas permitidas
-  $columnas_permitidas = ['Fecha', 'Moto_Num', 'id'];
+  $columnas_permitidas = ['Fecha', 'Moto_Num', 'id', 'folio'];
 
   if (in_array($buscar_opc, $columnas_permitidas)) {
       if ($buscar_id === '') {

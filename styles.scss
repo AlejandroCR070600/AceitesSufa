@@ -1,24 +1,15 @@
-$primary: #1b1a18 ;  
-$secondary: #ff9d00;
-$success: #2c2b28;
-$info: #FFFFFF;
-$warning: #FF9F00;
-$danger: #ff4136;    
-$light: #f8f9fa;
-$dark: #2c2b28;
+@use "node_modules/bootstrap/scss/bootstrap" with (
 
-$theme-colors: (
-    "primary":    $primary,
-    "secondary":  $secondary,
-    "success":    $success,
-    "info":       $info,
-    "warning":    $warning,
-    "danger":     $danger,
-    "light":      $light,
-    "dark":       $dark
-);
-
-$table-dark-bg: #2c2b28; 
+  $theme-colors: (
+    "primary":    #ffffff,
+    "secondary":  #57B4BA,
+    "success":    #2c2b28,
+    "info":       #FE4F2D,
+    "warning":    #ff9f00,
+    "danger":     #ff4136,
+    "light":      #57B4BA,
+    "dark":       #2c2b28
+  )
 
   
-@import "./node_modules/bootstrap/scss/bootstrap.scss";
+);
