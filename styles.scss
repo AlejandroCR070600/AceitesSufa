@@ -1,14 +1,14 @@
 @use "node_modules/bootstrap/scss/bootstrap" with (
 
   $theme-colors: (
-    "primary":    #ffffff,
-    "secondary":  #57B4BA,
-    "success":    #2c2b28,
-    "info":       #FE4F2D,
+    "primary":    #666666,
+    "secondary":  #d3bea7,
+    "success":    gray,
+    "info":       #255C99,
     "warning":    #ff9f00,
     "danger":     #ff4136,
     "light":      #57B4BA,
-    "dark":       #2c2b28
+    "dark":       #1f1e1c
   )
 
   

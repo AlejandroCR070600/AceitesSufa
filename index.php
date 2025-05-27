@@ -47,24 +47,18 @@ if (isset($_GET['opciones'])) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Aceites Sufacen</title>
     
     <link href="styles.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-      *{
-        margin:none;
-        padding:none;
-      }
-      html, body {
-  height: 100%;  /* Establece la altura del html y body al 100% de la pantalla */
-  margin: 0;     /* Elimina el margen por defecto del body */
-  padding: 0;    /* Elimina el relleno por defecto */
-  
-}
+     
+
 .transparent{
     background:transparent !important;
 }
@@ -82,38 +76,44 @@ if (isset($_GET['opciones'])) {
 </head>
 
 <body class="">
-    
-
-       <div class="container border" >
-        
-         <nav class="" role="group" aria-label="Basic example" >
-                <button type="button" class="" onclick="mostrarFormulario(1)">ENTREGAR ACEITES</button>
-                <button type="button" class="" onclick="mostrarFormulario(2)">AGREGAR ACEITES</button>
-                <button type="button" class="" onclick="mostrarFormulario(3)">BUSCAR</button>
-                <button type="button" class="" onclick="mostrarFormulario(4)">INFORME</button>    
-                
-        </nav>
-      
-    
-        
-        
+    <div class=" container-fluid ">
+        <section class="row  ">
             
-        <section class="border">
-            <?php echo"<h1 >".$aceites_Stock."</h1>"; ?>
-            <aside class=" " >
-                <form   id="form1" method="POST" action="BD/agregar_datos.php" class="">                    
-                    <label class=""><h4>SALIDA DE ACEITES</h4></label>
-                    <input type="date" id="fecha" name="fecha" placeholder="FECHA" class="" >
-                    <input type="number" id="Aceites" name="Aceites" placeholder="ACEITES" class="" >          
-                    <input type="text" id="Num_moto" name="Num_Moto" placeholder="Numero de Moto" class="" >
-                    <input type="submit" value="AGREGAR" class="" style="width: 100px;">
+            <aside class="col-md-3  bg-dark min-vh-100  text-center  p-3 d-flex flex-column align-items-center justify-content-evenly" >
+                
+                    <nav class=" d-flex flex-column justify-content-center align-items-center" role="group" aria-label="Basic example" >
+                       
+                                <button type="button" class=" m-1 btn btn-primary form-control" onclick="mostrarFormulario(1)">ENTREGAR ACEITES</button>
+                                <button type="button" class=" m-1 btn btn-primary form-control" onclick="mostrarFormulario(2)">AGREGAR ACEITES</button>
+                          
+                                <button type="button" class=" m-1 btn btn-primary form-control" onclick="mostrarFormulario(3)">BUSCAR</button>
+                                <button type="button" class=" m-1 btn btn-primary form-control" onclick="mostrarFormulario(4)">INFORME</button>    
+                           
+                        
+                    </nav>
+                    
+                
+                <form   id="form1" method="POST" action="BD/agregar_datos.php" class="d-flex flex-column container ">                    
+                    <label class="text-white bg-primary mb-3 rounded-3"><h4>SALIDA DE ACEITES</h4></label>
+                    
+             <div class="container">           <input type="date" id="fecha" name="fecha" placeholder="FECHA" class="col-md-10 rounded-4 form-control form-control-lg mb-3" >
+               
+                        <input type="number" id="Aceites" name="Aceites" placeholder="ACEITES" class="col-md-10 rounded-4 form-control form-control-lg mb-3" >          
+             
+                        <input type="text" id="Num_moto" name="Num_Moto" placeholder="Numero de Moto" class="col-md-10 rounded-4 form-control form-control-lg mb-3" >
+                    </div>
+
+             
+                        <input type="submit" value="AGREGAR" class="col-md-10 form-control btn btn-primary fs-5">
+                    
+                   
                 </form>
 
                 <form method="GET" action="BD/aceites_Disponibles.php" id="form2" class="form-container text-center">
                     <label> <h4>INGRESAR ACEITES</h4></label>
-                    <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES" class="form-control form-control-sm rounded-5 bg-light text-muted mb-3 ">
-                    <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" class="form-control form-control-sm rounded-5 bg-light text-muted mb-3">
-                    <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="btn btn-secondary text-white form-control-sm rounded-5 mt-2">
+                    <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES"  >
+                    <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" >
+                    <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" >
                 </form>
 
                 <form id="form3" class="form-container text-center " method="GET" action="" >
@@ -123,22 +123,24 @@ if (isset($_GET['opciones'])) {
                         <option value="Moto_Num">Moto</option>
                         <option value="id" >folio</option>
                     </select>
-                    <input type="input" id="buscar" name="buscar" class="form-control form-control-sm rounded-5 bg-light text-muted" >
-                    <input type="submit" value="BUSCAR" class="btn btn-secondary text-white  form-control-sm rounded-5 mt-2">
+                    <input type="input" id="buscar" name="buscar" class="" >
+                    <input type="submit" value="BUSCAR" class="">
                 </form>
                 
 
                 
                 <form id="form4" class="form-container text-center" method="POST" action="pdf/generador_PDF.php">
                     <label><h5>FECHA DE LA FACTURA</h5></label>
-                    <input id="select_Informe" name="select_Informe" type="DATE" class="form-control form-control-sm rounded-5 bg-light text-muted">
-                    <input type="submit" name="submitInforme" value="DESCARGAR" class="btn btn-secondary text-white  form-control-sm rounded-5 mt-2">
+                    <input id="select_Informe" name="select_Informe" type="DATE" class="">
+                    <input type="submit" name="submitInforme" value="DESCARGAR" class="">
                 </form>
+               
             </aside>  
-            <main class="" >
-                
-                <div class="">
-                    <table class="" >
+            
+            <main class=" d-flex flex-column align-items-center justify-content-center col-md-9 border" >
+                <?php echo"<h1 >".$aceites_Stock."</h1>"; ?>
+                <div class="tableUI container-fluid table-responsive border">
+                    <table class="table" >
                         <thead class="">
                             <tr>
                                 <th>ID</th>
@@ -161,10 +163,10 @@ if (isset($_GET['opciones'])) {
                                     echo "<td>".$row['folio']."</td>";
                                     echo "<td>
                                             <a href='BD/eliminar.php?id=" . $row['id'] . "' onclick='return confirm(\"¿Estás seguro de eliminar este registro?\")'>
-                                                <button class='btn btn-secondary text-white btn-sm'>Eliminar</button>
+                                                <button class='btn btn-primary text-white btn-sm'>Eliminar</button>
                                             </a>
                                             <a href='BD/agregar_datosE.php?id=" . $row['id'] . "'>
-                                                <button class='btn btn-secondary text-white btn-sm'>Editar</button>
+                                                <button class='btn btn-primary text-white btn-sm'>Editar</button>
                                             </a>
                                         </td>";
                                     echo "</tr>";
@@ -173,14 +175,13 @@ if (isset($_GET['opciones'])) {
                             ?>
                         </tbody>
                     </table>
-                
                 </div>
-              
             </main>  
         </section>
+    </div>
        
             
-       </div>
+       
    
 
 <script src=""></script>

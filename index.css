@@ -1,0 +1,15 @@
+
+ *{
+        margin:none;
+        padding:none;
+      }
+
+.tableUI{
+    
+    overflow: auto;
+    height: 500px;
+    
+}
+aside{
+    height: 100%;
+}
