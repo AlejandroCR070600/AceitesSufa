@@ -56,101 +56,100 @@ if (isset($_GET['opciones'])) {
     <link href="index.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-     
 
-.transparent{
-    background:transparent !important;
-}
-     
-  
-        .form-container {
-            display: none; /* Ocultar formularios inicialmente */
-            
-            
-        }
-        #form1 {
-            display: block;
-        }
-    </style>
 </head>
 
-<body class="">
-    <div class=" container-fluid ">
-        <section class="row  ">
+<body class="container-fluid">
+    <div class="">
+        
+         <div class="row vh-100">
             
-            <aside class="col-md-3  bg-dark min-vh-100  text-center  p-3 d-flex flex-column align-items-center justify-content-evenly" >
+          
                 
-                    <nav class=" d-flex flex-column justify-content-center align-items-center" role="group" aria-label="Basic example" >
-                       
-                                <button type="button" class=" m-1 btn btn-primary form-control" onclick="mostrarFormulario(1)">ENTREGAR ACEITES</button>
-                                <button type="button" class=" m-1 btn btn-primary form-control" onclick="mostrarFormulario(2)">AGREGAR ACEITES</button>
-                          
-                                <button type="button" class=" m-1 btn btn-primary form-control" onclick="mostrarFormulario(3)">BUSCAR</button>
-                                <button type="button" class=" m-1 btn btn-primary form-control" onclick="mostrarFormulario(4)">INFORME</button>    
-                           
-                        
-                    </nav>
-                    
-                
-                <form   id="form1" method="POST" action="BD/agregar_datos.php" class="d-flex flex-column container ">                    
-                    <label class="text-white bg-primary mb-3 rounded-3"><h4>SALIDA DE ACEITES</h4></label>
-                    
-             <div class="container">           <input type="date" id="fecha" name="fecha" placeholder="FECHA" class="col-md-10 rounded-4 form-control form-control-lg mb-3" >
-               
-                        <input type="number" id="Aceites" name="Aceites" placeholder="ACEITES" class="col-md-10 rounded-4 form-control form-control-lg mb-3" >          
-             
-                        <input type="text" id="Num_moto" name="Num_Moto" placeholder="Numero de Moto" class="col-md-10 rounded-4 form-control form-control-lg mb-3" >
+    <aside id="aside" class="">
+        <ul class="">
+            <li class="">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="">
+                    <path fill-rule="evenodd" d="M10.5 3.798v5.02a3 3 0 0 1-.879 2.121l-2.377 2.377a9.845 9.845 0 0 1 5.091 1.013 8.315 8.315 0 0 0 5.713.636l.285-.071-3.954-3.955a3 3 0 0 1-.879-2.121v-5.02a23.614 23.614 0 0 0-3 0Zm4.5.138a.75.75 0 0 0 .093-1.495A24.837 24.837 0 0 0 12 2.25a25.048 25.048 0 0 0-3.093.191A.75.75 0 0 0 9 3.936v4.882a1.5 1.5 0 0 1-.44 1.06l-6.293 6.294c-1.62 1.621-.903 4.475 1.471 4.88 2.686.46 5.447.698 8.262.698 2.816 0 5.576-.239 8.262-.697 2.373-.406 3.092-3.26 1.47-4.881L15.44 9.879A1.5 1.5 0 0 1 15 8.818V3.936Z" clip-rule="evenodd" />
+                </svg>
+                <button type="button" class="" onclick="mostrarFormulario(1)">ENTREGAR ACEITES</button>
+            </li>
+            <li id="form1" class="">
+                <form method="POST" action="BD/agregar_datos.php" class="">
+                    <label class=""><h4>SALIDA DE ACEITES</h4></label>
+                    <div class="">
+                        <input type="date" id="fecha" name="fecha" placeholder="FECHA" class="">
+                        <input type="number" id="Aceites" name="Aceites" placeholder="ACEITES" class="">
+                        <input type="text" id="Num_moto" name="Num_Moto" placeholder="Numero de Moto" class="">
                     </div>
-
-             
-                        <input type="submit" value="AGREGAR" class="col-md-10 form-control btn btn-primary fs-5">
-                    
-                   
+                    <input type="submit" value="AGREGAR" class="">
                 </form>
-
-                <form method="GET" action="BD/aceites_Disponibles.php" id="form2" class="form-container text-center">
-                    <label> <h4>INGRESAR ACEITES</h4></label>
-                    <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES"  >
-                    <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" >
-                    <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" >
+            </li>
+            <li class="">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="">
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+                </svg>
+                <button type="button" class="" onclick="mostrarFormulario(2)">AGREGAR ACEITES</button>
+            </li>
+            <li id="form2" class="">
+                <form method="GET" action="BD/aceites_Disponibles.php" class="">
+                    <label class=""><h4>INGRESAR ACEITES</h4></label>
+                    <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES" class="">
+                    <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" class="">
+                    <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="">
                 </form>
-
-                <form id="form3" class="form-container text-center " method="GET" action="" >
-                    <label for="buscar" class="form-label ">Buscar por</label>
-                    <select name="opciones" id="opciones" required class="form-select-sm text-white bg-secondary">
-                        <option value="Fecha" >fecha</option>
+            </li>
+            <li class="">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="">
+                    <path d="M8.25 10.875a2.625 2.625 0 1 1 5.25 0 2.625 2.625 0 0 1-5.25 0Z" />
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.125 4.5a4.125 4.125 0 1 0 2.338 7.524l2.007 2.006a.75.75 0 1 0 1.06-1.06l-2.006-2.007a4.125 4.125 0 0 0-3.399-6.463Z" clip-rule="evenodd" />
+                </svg>
+                <button type="button" class="" onclick="mostrarFormulario(3)">BUSCAR</button>
+            </li>
+            <li id="form3" class="">
+                <form method="GET" action="" class="">
+                    <label for="buscar" class="">Buscar por</label>
+                    <select name="opciones" id="opciones" required class="">
+                        <option value="Fecha">fecha</option>
                         <option value="Moto_Num">Moto</option>
-                        <option value="id" >folio</option>
+                        <option value="id">folio</option>
                     </select>
-                    <input type="input" id="buscar" name="buscar" class="" >
+                    <input type="text" id="buscar" name="buscar" class="">
                     <input type="submit" value="BUSCAR" class="">
                 </form>
-                
-
-                
-                <form id="form4" class="form-container text-center" method="POST" action="pdf/generador_PDF.php">
-                    <label><h5>FECHA DE LA FACTURA</h5></label>
+            </li>
+            <li class="">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="">
+                    <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" />
+                    <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                </svg>
+                <button type="button" class="" onclick="mostrarFormulario(4)">INFORME</button>
+            </li>
+            <li id="form4" class="">
+                <form method="POST" action="pdf/generador_PDF.php" class="">
+                    <label class=""><h5>FECHA DE LA FACTURA</h5></label>
                     <input id="select_Informe" name="select_Informe" type="DATE" class="">
                     <input type="submit" name="submitInforme" value="DESCARGAR" class="">
                 </form>
-               
-            </aside>  
-            
-            <main class=" d-flex flex-column align-items-center justify-content-center col-md-9 border" >
-                <?php echo"<h1 >".$aceites_Stock."</h1>"; ?>
-                <div class="tableUI container-fluid table-responsive border">
-                    <table class="table" >
-                        <thead class="">
-                            <tr>
-                                <th>ID</th>
-                                <th>FECHA</th>
-                                <th>MOTO</th>
-                                <th>ACEITES</th>
-                                <th>FOLIO</th>
-                                <th>ACCIONES</th>
+            </li>
+        </ul>
+    </aside>
+
+
+
+                <div class=" container tableUI col-sm-12 col-md-6">
+                    <table class="table table-hover " >
+                        <thead class="" >
+                            <tr >
+                                <th class="bg-secondary  text-white">ID</th>
+                                <th class="bg-secondary  text-white">FECHA</th>
+                                <th class="bg-secondary  text-white">MOTO</th>
+                                <th class="bg-secondary  text-white">ACEITES</th>
+                                <th class="bg-secondary  text-white">FOLIO</th>
+                                <th class="bg-secondary  text-white">ACCIONES</th>
                             </tr>
                         </thead>
+                        
                         <tbody class="" >
                             <?php
                             if ($result->num_rows > 0) {
@@ -163,10 +162,10 @@ if (isset($_GET['opciones'])) {
                                     echo "<td>".$row['folio']."</td>";
                                     echo "<td>
                                             <a href='BD/eliminar.php?id=" . $row['id'] . "' onclick='return confirm(\"¿Estás seguro de eliminar este registro?\")'>
-                                                <button class='btn btn-primary text-white btn-sm'>Eliminar</button>
+                                                <button class='btn btn-secondary text-white btn-sm'>Eliminar</button>
                                             </a>
                                             <a href='BD/agregar_datosE.php?id=" . $row['id'] . "'>
-                                                <button class='btn btn-primary text-white btn-sm'>Editar</button>
+                                                <button class='btn btn-secondary text-white btn-sm'>Editar</button>
                                             </a>
                                         </td>";
                                     echo "</tr>";
@@ -174,17 +173,21 @@ if (isset($_GET['opciones'])) {
                             }
                             ?>
                         </tbody>
+                        
                     </table>
                 </div>
-            </main>  
-        </section>
+            
+         </div>
+            
+   
+        
     </div>
        
             
        
    
 
-<script src=""></script>
+<script src="index.js"></script>
 <style>
     .table-responsive::-webkit-scrollbar {
         width: 8px; /* Ancho del scroll */

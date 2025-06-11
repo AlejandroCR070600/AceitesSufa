@@ -1,15 +1,21 @@
+
+
 @use "node_modules/bootstrap/scss/bootstrap" with (
 
-  $theme-colors: (
-    "primary":    #666666,
-    "secondary":  #d3bea7,
-    "success":    gray,
-    "info":       #255C99,
-    "warning":    #ff9f00,
-    "danger":     #ff4136,
-    "light":      #57B4BA,
-    "dark":       #1f1e1c
-  )
+$theme-colors: (
+  "primary":    #0d6efd,   // Azul
+  "secondary":  #6c757d,   // Gris oscuro
+  "success":    #198754,   // Verde
+  "info":       #0dcaf0,   // Celeste
+  "warning":    #ffc107,   // Amarillo
+  "danger":     #dc3545,   // Rojo
+  "light":      #f8f9fa,   // Gris muy claro
+  "dark":       #212529    // Gris muy oscuro
+)
+
+
+
+
 
   
 );

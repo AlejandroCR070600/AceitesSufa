@@ -1,10 +1,10 @@
+function mostrarFormulario(formID){
 
-  function mostrarFormulario(formId) {
-            // Ocultar todos los formularios
-            document.querySelectorAll('.form-container').forEach(function(form) {
+console.log(formID);
+document.querySelectorAll('.form').forEach(function(form) {
                 form.style.display = 'none';
             });
 
             // Mostrar el formulario seleccionado
-            document.getElementById('form' + formId).style.display = 'block';
-        }
+            document.getElementById('form' + formID).style.display = 'block';
+}

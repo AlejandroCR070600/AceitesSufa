@@ -4,12 +4,44 @@
         padding:none;
       }
 
+      body,html{
+        height: 100%;
+        margin:none;
+        padding: none;
+      }
+
 .tableUI{
     
     overflow: auto;
     height: 500px;
     
 }
+
 aside{
-    height: 100%;
+    border: 2px solid black;
+}
+ul{
+    list-style: none;
+}
+input[type="number"],
+input[type="text"],
+input[type="date"]{
+    background-color: rgb(179, 179, 179);
+    -moz-appearance: textfield;
+    border-radius: 10px;
+}
+
+input[type="submit"]{
+    background-color: brown;
+}
+.form{
+    display: none;
+}
+svg{
+  width: 25px;
+}
+
+.div{
+  border:2px solid red;
+  width: 30%;
 }
