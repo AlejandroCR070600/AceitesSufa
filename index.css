@@ -8,6 +8,7 @@
         height: 100%;
         margin:none;
         padding: none;
+        background-color: #fbfcfc;
       }
 
 .tableUI{
@@ -18,7 +19,8 @@
 }
 
 aside{
-    border: 2px solid black;
+    
+    background-color: #34495e;
 }
 ul{
     list-style: none;
@@ -34,14 +36,25 @@ input[type="date"]{
 input[type="submit"]{
     background-color: brown;
 }
-.form{
+.asideBTN{
     display: none;
 }
-svg{
-  width: 25px;
+i{
+  color: #fbfcfc;
+  
 }
 
 .div{
   border:2px solid red;
   width: 30%;
+}
+.button{
+  background-color: transparent;
+  border:none ;
+}
+
+.button:hover{
+background-color: #2e4053;
+border-radius: 100%;
+padding: 10px;
 }
