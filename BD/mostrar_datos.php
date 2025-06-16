@@ -1,73 +1,99 @@
 <?php
-require 'conexion.php';
-session_start();
-if ($conn -> connect_error){
-    die("Error en la conexion".$conn->connect_error);
+require "conexion.php";
+
+$value=json_decode(file_get_contents("php://input"), true);
+
+
+if($value&& isset($value['folio'])){
+    $table_Date=$value['folio'];
+}else{
+    $table_Date=LastFolio();
 }
 
-$sqlA="SELECT Cant_Aceites FROM aceites_Stock ORDER BY id DESC LIMIT 1";
-$sql="SELECT * FROM control_aceites";
-$sqlI="SELECT inicio FROM informe ORDER BY id DESC LIMIT 1";
+
+    
+
+    
 
 
-$resultI = $conn->query($sqlI);
-$result = $conn->query($sql);
-$resultA = $conn->query($sqlA);
-
-function cierreInforme($conn, $info) {
 
 
-    // Verifica si el mensaje ya está establecido
-    if (!isset($_SESSION['mensaje'])) {
-        $dateHoy = date('Y-m-d');
-        
-        // Consulta preparada para actualizar la base de datos
-        $stmt = $conn->prepare("UPDATE informe SET final = ? WHERE inicio = ?");
-        $stmt->bind_param('ss', $dateHoy, $info);
 
-        if ($stmt->execute()) {
-            $_SESSION['mensaje'] = "Termino la factura";
-        } else {
-            $_SESSION['mensaje'] = "No se realizó el informe: " . $conn->error;
-        }
 
-        $stmt->close();
+function folios(){
+    global $conn;
+$sql="SELECT folio from informe";
+$result=$conn->query($sql);
+$folio=[];
+if($result->num_rows>0){
+    while($row=$result->fetch_assoc()){
+        $folio[]=$row['folio'];
+    }
+    
+}
+return $folio;
+}
 
-        // Redirigir solo si no hay bucle
-        header("Location: /AceitesSufa/index.php");
-        exit;
+function aceites_Sotck(){
+    global $conn;
+    $sql="SELECT Cant_Aceites from aceites_stock order by id desc limit 1";
+    $result=$conn->query($sql);
+
+    if($result->num_rows>0){
+        $row=$result->fetch_assoc();
+        return $row['Cant_Aceites'];
     }
 }
 
 
-    if($resultA && $resultA->num_rows>0){
-    if($resultI->num_rows>0){
 
 
-        $rowA= $resultA->fetch_assoc();
-        $aceites_Stock=$rowA['Cant_Aceites'];
+
+
+
+
+function LastFolio(){
+    global $conn;
+    $sqlF="SELECT FOLIO FROM INFORME ORDER BY ID DESC LIMIT 1";
+    $resultF=$conn->query($sqlF);
+
+    if($resultF->num_rows>0){
+        $row=$resultF->fetch_assoc();
+        return $row['FOLIO'];
         
-        if ($resultI && $resultI->num_rows > 0) {
-            $rowI = $resultI->fetch_assoc();
-            $info = $rowI['inicio'];
-        }
 
 
-        if($aceites_Stock>0){
-            $aceites_Stock="ACEITES DISPONIBLES : ".$rowA['Cant_Aceites'];
-            
-        }else{
-           if($aceites_Stock==0){
-            $aceites_Stock="Ya no  hay aceites prro";
-            cierreInforme($conn, $info);
-            
-           }
-        }  
     }
-    }else{
-            $aceites_Stock="tabla aceites_Stock vacia";
-        } 
-      
+}
+
+
+
+
+function Show_Datos($lastFolio){
+    global $conn;
+    
+    $sql="SELECT * FROM control_aceites WHERE folio='$lastFolio'";
+    $result=$conn->query($sql);
+    $datos=[];
+    if($result->num_rows>0){
+        while($row=$result->fetch_assoc()){
+            $datos[]=$row;
+        }
+    }
+    return $datos;
+}
+
+
+$table=Show_Datos($table_Date);
+
+echo json_encode([
+    'show_datos'=>$table,
+    'folio'=>folios(),
+    'aceites_stock'=>aceites_Sotck(),
+    
+    
+]);
+
 
 
      
