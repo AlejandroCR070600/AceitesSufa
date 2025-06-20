@@ -61,141 +61,93 @@ if (isset($_GET['opciones'])) {
 
 </head>
 
-<body class="container-fluid">
-    <div class="">
-        
-         <div class="row vh-100">
-            
-          
-                
-    <aside id="aside" class="col-md-1 p-0 d-flex">
-        <div class="d-flex flex-column justify-content-around w-100 h-100">
-                
-               
-                <button type="button" class="button p-3" onclick="mostrarFormulario(2)"><i class="fa-solid fa-circle-plus icon-grand fa-2x"></i></button>
-              
-              
-                <button type="button" class="button p-3" onclick="mostrarFormulario(3)"><i class="fa-solid fa-magnifying-glass fa-2x"></i></button>
-            
-            
-
-            
-            
-                <button type="button" class="button p-3" onclick="mostrarFormulario(1)">  <i class="fa-solid fa-circle-minus fa-2x"></i></button>
-            
-      
-        
-      
-       
-            
-        
-                <button type="button" class="button p-3" onclick="mostrarFormulario(4)">   <i class="fa-solid fa-file fa-2x"></i></button>
-            
-      
-</div>
-         
-    </aside>
-
-
-
-                <section class="col-sm-12 col-md-10">
-                   <div class="row justify-content-center align-items-center g-5">
-                     <div class="col-md-4 ">
-                        <form method="POST" action="BD/agregar_datos.php" class="">
-                            <article class="article bg-light">
-                            <h4 class=" text-white text-center">SALIDA DE ACEITES</h4>
-                            </article>
-
-                            <div class="d-flex flex-column  border-light align-items-center bg-light">
-                                <div class="col-md-8 d-flex flex-column p-2">
-                                    <label class="">Fecha</label>
-                                    <input type="date" id="fecha" name="fecha" class="">
-                                </div>
-                                <div class="col-md-8 d-flex flex-column p-2">
-                                    <label  class="">Aceites</label>
-                                    <input type="number" id="Aceites" name="Aceites"  value="1" class="">
-                                </div>
-                                <div class="col-md-8 d-flex flex-column p-2 ">
-                                    <label  clas="">Moto</label>
-                                    <input type="text" id="Num_moto" name="Num_Moto"  class="">
-                                </div>
-                    
-                                <div class="p-2">
-                                    <input type="submit" value="AGREGAR" class="">
-                                </div>
-</div>
-                        </form>
-
-
-                  <form method="GET" action="BD/aceites_Disponibles.php" class="form">
-                    <label class=""><h4>INGRESAR ACEITES</h4></label>
-                    <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES" class="">
-                    <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" class="">
-                    <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="">
-                </form>
-                  <form method="GET" action="" class="form">
-                    <label  class="">Buscar por</label>
-                    <select name="opciones" id="opciones" required class="">
-                        <option value="Fecha">fecha</option>
-                        <option value="Moto_Num">Moto</option>
-                        <option value="id">folio</option>
-                    </select>
-                    <input type="text" id="buscar" name="buscar" class="">
-                    <input type="submit" value="BUSCAR" class="">
-                </form>
-                     <form method="POST" action="pdf/generador_PDF.php" class="form">
-                    <label class=""><h5>FECHA DE LA FACTURA</h5></label>
-                    <input id="select_Informe" name="select_Informe" type="DATE" class="">
-                    <input type="submit" name="submitInforme" value="DESCARGAR" class="">
-                </form>
-                    </div>
-
-
-                <div class="col-md-6 d-flex flex-column">
-                    <article class="container-fluid bg-light article">
-                        <h1 id="aceites" class="text-center"></h1>
-                       <div class="d-flex justify-content-center " >
-                        <h1 class="m-1">FOLIO:  </h1>
-                         <select id="selectF" name="selectF" class="m-1 text-center bg-dark">
-
-                        </select>
-                       </div>
+<body class="bg-light">
+    
+   <div class="container-fluid  ">
+        <div class="row align-items-center vh-100">
+            <header class="col-md-12 col-sm-12 d-flex flex-column flex-md-row justify-content-around">
+             
+                    <form method="POST" action="BD/agregar_datos.php" class="col-md-2 col-sm-12 d-flex flex-column bg-white m-2 p-3 shadow">
+                    <article>
+                        <h4>SALIDA DE ACEITES</h4>
                     </article>
-                    <div class="tableUI  ">
-                    <table class="table table-hover border border-light" >
-                    
-                        <thead class="" >
-                            <tr >
-                                <th class="bg-light text-white">ID</th>
-                                <th class=" bg-light text-white">FECHA</th>
-                                <th class=" bg-light text-white">MOTO</th>
-                                <th class=" bg-light text-white">ACEITES</th>
-                                <th class=" bg-light text-white">FOLIO</th>
-                                <th class=" bg-light text-white">ACCIONES</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody id="tbody" class="" >
-                            
-                        
-                        </tbody>
-                        
-                    </table>
-                </div>
-                </div>
-                   </div>
-                </section>
-            
-         </div>
-            
-   
-        
-    </div>
-       
-            
-       
-   
 
+                
+                    <label>Fecha</label>
+                    <input type="date" id="fecha" name="fecha">
+            
+                    <label>Aceites</label>
+                    <input type="number" id="Aceites" name="Aceites" value="1">
+                    
+                    <label>Moto</label>
+                    <input type="text" id="Num_moto" name="Num_Moto">
+                    
+                    <input type="submit" value="AGREGAR">
+                        
+                    
+                    </form>
+
+                    <form method="GET" action="BD/aceites_Disponibles.php" class="col-md-2 col-sm-12  d-flex flex-column bg-white m-2 p-3 shadow">
+                        <label><h4>INGRESAR ACEITES</h4></label>
+                        <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES">
+                        <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO">
+                        <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites">
+                    </form>
+
+                        <form method="GET" class="col-md-2 col-sm-12 border d-flex flex-column bg-white m-2 p-3 shadow">
+                        <label>Buscar por</label>
+                        <select name="opciones" id="opciones" required>
+                            <option value="Fecha">fecha</option>
+                            <option value="Moto_Num">Moto</option>
+                            <option value="id">folio</option>
+                        </select>
+                        <input type="text" id="buscar" name="buscar">
+                        <input type="submit" value="BUSCAR">
+                    </form>
+
+                    <form method="POST" action="pdf/generador_PDF.php" class="col-md-2 col-sm-12 d-flex flex-column bg-white m-2 p-3 shadow">
+                        <label><h5>FECHA DE LA FACTURA</h5></label>
+                        <input id="select_Informe" name="select_Informe" type="DATE">
+                        <input type="submit" name="submitInforme" value="DESCARGAR">
+                    </form>
+                
+            </header>
+            <section class="col-md-12">
+
+                <div class="row justify-content-around align-items-center">
+                        <article class="col-sm-10 col-md-3 shadow bg-white m-3 p-5 text-center">
+                        <h1 >Aceites Disponibles</h1>
+                        <h1 id="aceites"></h1>
+                    
+                        <div class=" container row">
+                            <h1 class="col-md-6">FOLIO:</h1>
+                            <select id="selectF" name="selectF" class="col-md-6"></select>
+                        </div>
+                    
+                    </article>
+
+                
+                    <article class="table-responsive col-sm-10  col-md-8 shadow bg-white m-2 vh-50 border">
+                        <table class="table  table-hover ">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>FECHA</th>
+                                    <th>MOTO</th>
+                                    <th>ACEITES</th>
+                                    <th>FOLIO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+                        </table> 
+                    </article>
+                </div>
+            </section> 
+        </div>
+   </div>
+            
 <script src="js/index.js"></script>
 <script src="js/mandar_datos.js"></script>
 <style>

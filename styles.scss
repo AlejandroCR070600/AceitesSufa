@@ -1,18 +1,15 @@
 @use "node_modules/bootstrap/scss/bootstrap" with (
-  $theme-colors: (
-    "primary":    #2e4053,
-    "secondary":  #34495e,
-    "success":    #198754,
-    "info":       #0dcaf0,
-    "warning":    #ffc107,
-    "danger":     #dc3545,
-    "light":      #2980B9,
-    "dark":       #868686
-  ),
+$theme-colors: (
+  "primary":    #0d6efd,
+  "secondary":  #6c757d,
+  "success":    #198754,
+  "info":       #0dcaf0,
+  "warning":    #ffc107,
+  "danger":     #dc3545,
+  "light":      #f8f9fa,
+  "dark":       #212529
+),
 
-  // 🎯 Variables específicas para tablas
-  $table-bg: #f4f6f7,
-  $table-striped-bg: #f4f6f7,
-  $table-hover-bg: #e0e0e0,
-  $table-border-color: #ffffff
+
+ 
 );
