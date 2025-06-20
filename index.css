@@ -21,3 +21,6 @@ select:hover{
     background-color: #ffffff;
     box-shadow: 0 0 5px #dc3545;
 }
+button:hover{
+color: #ffffff;
+}

@@ -69,10 +69,10 @@ if (isset($_GET['opciones'])) {
             <header class="col-md-3 col-sm-12 d-flex flex-column   p-0  vh-100">
                          
   <div class="btn-group" role="group" aria-label="Basic outlined example">
-                     <button class="btn border-0 btn-outline-dark rounded-0" onclick="mostrarFormulario(1)">Entregar</button>
-                   <button class="btn border-0 btn-outline-dark rounded-0" onclick="mostrarFormulario(2)" >Agregar</button>
-                 <button class="btn border-0 btn-outline-dark rounded-0" onclick="mostrarFormulario(3)">Buscar</button>
-  <button type="button" class="btn border-0 btn-outline-dark rounded-0" onclick="mostrarFormulario(4)">Informe</button>
+                     <button class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(1)">Entregar</button>
+                   <button class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(2)" >Agregar</button>
+                 <button class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(3)">Buscar</button>
+  <button type="button" class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(4)">Informe</button>
 </div>
 
              
