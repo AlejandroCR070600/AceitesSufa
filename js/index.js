@@ -17,7 +17,7 @@ fetch("BD/mostrar_datos.php")
     let control_aceites=['id','Fecha','Moto_Num','Cant_Aceites','folio'];
 
     //agrega el valor de los aceites disponibles de momento en el h1
-    aceites_Disponibles.textContent="Aceites Disponibles: "+datos['aceites_stock'];
+    aceites_Disponibles.textContent=datos['aceites_stock'];
     
     
     //crea los options de los folios
