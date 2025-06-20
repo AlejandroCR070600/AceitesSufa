@@ -72,24 +72,14 @@ if (isset($_GET['opciones'])) {
         <div class="d-flex flex-column justify-content-around w-100 h-100">
                 
                
-                <button type="button" class="button p-3" onclick="mostrarFormulario(2)"><i class="fa-solid fa-circle-plus icon-grand fa-2x"></i></button>
+                <button type="button" class="button p-3" onclick="mostrarFormulario(1)"><i class="fa-solid fa-circle-plus icon-grand fa-2x"></i></button>
               
               
-                <button type="button" class="button p-3" onclick="mostrarFormulario(3)"><i class="fa-solid fa-magnifying-glass fa-2x"></i></button>
-            
-            
+                <button type="button" class="button p-3" onclick="mostrarFormulario(2)">  <i class="fa-solid fa-circle-minus fa-2x"></i></button>
 
-            
-            
-                <button type="button" class="button p-3" onclick="mostrarFormulario(1)">  <i class="fa-solid fa-circle-minus fa-2x"></i></button>
-            
-      
+                <button type="button" class="button p-3" onclick="mostrarFormulario(3)"><i class="fa-solid fa-magnifying-glass fa-2x"></i></button>
         
-      
-       
-            
-        
-                <button type="button" class="button p-3" onclick="mostrarFormulario(4)">   <i class="fa-solid fa-file fa-2x"></i></button>
+                <button type="button" class="button p-3">   <i class="fa-solid fa-file fa-2x"></i></button>
             
       
 </div>
@@ -101,7 +91,7 @@ if (isset($_GET['opciones'])) {
                 <section class="col-sm-12 col-md-10">
                    <div class="row justify-content-center align-items-center g-5">
                      <div class="col-md-4 ">
-                        <form method="POST" action="BD/agregar_datos.php" class="">
+                        <form method="POST" id="form1" action="BD/agregar_datos.php" class="form">
                             <article class="article bg-light">
                             <h4 class=" text-white text-center">SALIDA DE ACEITES</h4>
                             </article>
@@ -198,6 +188,7 @@ if (isset($_GET['opciones'])) {
 
 <script src="js/index.js"></script>
 <script src="js/mandar_datos.js"></script>
+<script src="js/acciones.js"></script>
 <style>
     .table-responsive::-webkit-scrollbar {
         width: 8px; /* Ancho del scroll */

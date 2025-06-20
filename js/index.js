@@ -1,4 +1,6 @@
 
+
+
 datos={};
 fetch("BD/mostrar_datos.php")
 .then(res=>res.json())
@@ -51,5 +53,13 @@ fetch("BD/mostrar_datos.php")
 
 
 
+
+function mostrarFormulario(){
+    let forms=document.querySelectorAll('.form');
+
+   forms.forEach((forms, index) => {
+console.log(index.length);
+   });
+}
 
 
