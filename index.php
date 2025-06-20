@@ -61,74 +61,117 @@ if (isset($_GET['opciones'])) {
 
 </head>
 
-<body class="bg-light">
+<body class="bg-secondary">
     
-   <div class="container-fluid  ">
-        <div class="row align-items-center vh-100">
-            <header class="col-md-12 col-sm-12 d-flex flex-column flex-md-row justify-content-around">
+   <div class="container-fluid">
+        <div class="row align-items-center justify-content-around">
+
+            <header class="col-md-3 col-sm-12 d-flex flex-column   p-0  vh-100">
+                         
+  <div class="btn-group" role="group" aria-label="Basic outlined example">
+                     <button class="btn border-0 btn-outline-dark rounded-0" onclick="mostrarFormulario(1)">Entregar</button>
+                   <button class="btn border-0 btn-outline-dark rounded-0" onclick="mostrarFormulario(2)" >Agregar</button>
+                 <button class="btn border-0 btn-outline-dark rounded-0" onclick="mostrarFormulario(3)">Buscar</button>
+  <button type="button" class="btn border-0 btn-outline-dark rounded-0" onclick="mostrarFormulario(4)">Informe</button>
+</div>
+
              
-                    <form method="POST" action="BD/agregar_datos.php" class="col-md-2 col-sm-12 d-flex flex-column bg-white m-2 p-3 shadow">
-                    <article>
-                        <h4>SALIDA DE ACEITES</h4>
-                    </article>
+                
+                    <div class="d-flex align-items-center justify-content-center  vh-100 ">
+
+                       <div class="forms ">
+                         <form method="POST" action="BD/agregar_datos.php" class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
+                            <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
+                                <h4 class="text-white m-0" >ENTREGAR ACEITE</h4>
+                            </article>
 
                 
-                    <label>Fecha</label>
-                    <input type="date" id="fecha" name="fecha">
-            
-                    <label>Aceites</label>
-                    <input type="number" id="Aceites" name="Aceites" value="1">
-                    
-                    <label>Moto</label>
-                    <input type="text" id="Num_moto" name="Num_Moto">
-                    
-                    <input type="submit" value="AGREGAR">
+                    <div class="container text-center m-3">
                         
+                                        <input type="date" id="fecha" name="fecha" class="form-control mb-3">
+                                
+                                        
+                                        <input type="number" id="Aceites" name="Aceites" value="1" placeholder="NUMERO" class="form-control mb-3">
+                                        
+                                        
+                                        <input type="text" id="Num_moto" name="Num_Moto" placeholder="MOTO" class="form-control mb-3">
+                                        
+                                        <input type="submit" value="AGREGAR" class="btn btn-outline-dark">
+                    </div>
                     
                     </form>
 
-                    <form method="GET" action="BD/aceites_Disponibles.php" class="col-md-2 col-sm-12  d-flex flex-column bg-white m-2 p-3 shadow">
-                        <label><h4>INGRESAR ACEITES</h4></label>
-                        <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES">
-                        <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO">
-                        <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites">
+                       </div>
+                   <div class="forms d-none">
+                     <form method="GET" action="BD/aceites_Disponibles.php" class="  d-flex  flex-column align-items-center bg-light  rounded-4  shadow">
+                          <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
+                                <h4 class="text-white m-0" >INGRESAR ACEITES</h4>
+                            </article>
+                            <div class="container text-center m-3">
+                        <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES" class="form-control mb-3">
+                        <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" class="form-control mb-3">
+                        <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="btn btn-outline-dark">
+                            </div>
                     </form>
+                   </div>
 
-                        <form method="GET" class="col-md-2 col-sm-12 border d-flex flex-column bg-white m-2 p-3 shadow">
-                        <label>Buscar por</label>
-                        <select name="opciones" id="opciones" required>
-                            <option value="Fecha">fecha</option>
+
+                    <div class="forms d-none">
+                                <form method="GET" class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
+                          <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
+                                <h4 class="text-white m-0" >BUSCAR POR</h4>
+                            </article>
+                            <div class="container text-center m-3">
+                        <select name="opciones" id="opciones" required class="form-control mb-3">
+                            <option value="Fecha" >fecha</option>
                             <option value="Moto_Num">Moto</option>
                             <option value="id">folio</option>
                         </select>
-                        <input type="text" id="buscar" name="buscar">
-                        <input type="submit" value="BUSCAR">
+                        <input type="text" id="buscar" name="buscar" class="form-control mb-3">
+                        <input type="submit" value="BUSCAR" class="btn btn-outline-dark">
+                            </div>
                     </form>
-
-                    <form method="POST" action="pdf/generador_PDF.php" class="col-md-2 col-sm-12 d-flex flex-column bg-white m-2 p-3 shadow">
-                        <label><h5>FECHA DE LA FACTURA</h5></label>
-                        <input id="select_Informe" name="select_Informe" type="DATE">
-                        <input type="submit" name="submitInforme" value="DESCARGAR">
+                    </div>
+                       
+                <div class="forms d-none">
+    
+                    <form method="POST" action="pdf/generador_PDF.php" class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
+                        <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
+                                <h4 class="text-white m-0" >INFORME</h4>
+                            </article>
+                        <div class="container text-center m-3">
+                        <input id="select_Informe" name="select_Informe" type="DATE" class="form-control mb-3">
+                        <input type="submit" name="submitInforme" value="DESCARGAR" class="btn btn-outline-dark">
+                        </div>
                     </form>
+                </div>
+                    
+                   </div>
                 
             </header>
-            <section class="col-md-12">
+            <section class="col-md-6 ">
 
-                <div class="row justify-content-around align-items-center">
-                        <article class="col-sm-10 col-md-3 shadow bg-white m-3 p-5 text-center">
-                        <h1 >Aceites Disponibles</h1>
-                        <h1 id="aceites"></h1>
+                <div class="row vh-100">
+                        <article class="bg-light text-center p-0">
+                        <h1 >Aceites Disponibles</h1>   
+                        <div class="container-fluid bg-danger">
+                            
+                        <h1 id="aceites" class="text-white"></h1>
+                        
+                        </div>
                     
-                        <div class=" container row">
-                            <h1 class="col-md-6">FOLIO:</h1>
-                            <select id="selectF" name="selectF" class="col-md-6"></select>
+                        <div class=" container ">
+                           <div class="d-flex justify-content-center ">
+                             <h1 class="">FOLIO: </h1>
+                            <select id="selectF" name="selectF" class="p-0 btn  btn-outline-dark"></select>
+                           </div>
                         </div>
                     
                     </article>
 
                 
-                    <article class="table-responsive col-sm-10  col-md-8 shadow bg-white m-2 vh-50 border">
-                        <table class="table  table-hover ">
+                    <article class="table-responsive col-sm-10  col-md-12 shadow bg-light  border">
+                        <table class="table table-light  table-hover ">
                             <thead>
                                 <tr>
                                     <th>ID</th>
