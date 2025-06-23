@@ -9,3 +9,22 @@ function mostrarFormulario(number) {
     }
   });
 }
+
+
+let btnBuscar=document.getElementById("btnBuscar");
+btnBuscar.addEventListener('click', function(event){
+event.preventDefault()
+  console.log("hola");
+  buscar();
+})
+
+
+function buscar(){
+  let selectOpciones=document.getElementById('opciones');
+  let inputBuscar=document.getElementById('buscar');
+    console.log( "holias") ;
+  console.log( selectOpciones.value) ;
+  console.log( inputBuscar.value) ;
+
+
+}

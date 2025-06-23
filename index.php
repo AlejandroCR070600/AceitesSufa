@@ -110,7 +110,7 @@ if (isset($_GET['opciones'])) {
                             <div class="container text-center m-3">
                         <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES" class="form-control mb-3">
                         <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" class="form-control mb-3">
-                        <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="btn btn-outline-dark">
+                        <button value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="btn btn-outline-dark"  >BUSCAR</button>
                             </div>
                     </form>
                    </div>
@@ -128,7 +128,7 @@ if (isset($_GET['opciones'])) {
                             <option value="id">folio</option>
                         </select>
                         <input type="text" id="buscar" name="buscar" class="form-control mb-3">
-                        <input type="submit" value="BUSCAR" class="btn btn-outline-dark">
+                        <button id="btnBuscar" class="btn btn-outline-dark" >BUSCAR</button>
                             </div>
                     </form>
                     </div>

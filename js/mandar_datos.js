@@ -35,7 +35,7 @@ select.addEventListener('change', function(){
           
             td.id=control_aceites[e]+i;
             td.textContent=datosR['show_datos'][restaI][control_aceites[e]];
-            tr.appendChild(td);
+      
         }
         tbody.appendChild(tr);
     }
