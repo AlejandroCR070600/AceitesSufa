@@ -8,12 +8,12 @@ fetch("BD/mostrar_datos.php")
     
     //guardamos los datos mandados de php en el objeo datos
     datos=data;
-    console.log(datos['show_datos']);
+    console.log(datos['aceites_stock']);
     
     //variables utilizadas
     let tbody=document.getElementById("tbody");
     let select_Folios=document.getElementById('selectF');
-    let aceites_Disponibles=document.getElementById('aceites');
+    let aceites_Disponibles=document.getElementById('aceites_stock');
     let control_aceites=['id','Fecha','Moto_Num','Cant_Aceites','folio'];
 
     //agrega el valor de los aceites disponibles de momento en el h1
@@ -22,7 +22,7 @@ fetch("BD/mostrar_datos.php")
     
     //crea los options de los folios
     for(let i=datos['folio'].length-1;i>=0;i--){
-        options=document.createElement('option');
+        let options=document.createElement('option');
         options.textContent=datos['folio'][i];
         select_Folios.appendChild(options);
 
@@ -54,12 +54,6 @@ fetch("BD/mostrar_datos.php")
 
 
 
-function mostrarFormulario(){
-    let forms=document.querySelectorAll('.form');
 
-   forms.forEach((forms, index) => {
-console.log(index.length);
-   });
-}
 
 

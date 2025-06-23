@@ -2,46 +2,6 @@
 require 'BD/conexion.php';
 
 date_default_timezone_set('America/Mexico_City');
-
-if (isset($_GET['opciones'])) {
-    $buscar_id = isset($_GET['buscar']) ? trim($_GET['buscar']) : ''; // Valor de búsqueda (puede ser vacío)
-    $buscar_opc = $_GET['opciones']; // Columna por la que buscar
-
-    // Lista blanca de columnas permitidas
-    $columnas_permitidas = ['Fecha', 'Moto_Num', 'id'];
-
-    if (in_array($buscar_opc, $columnas_permitidas)) {
-        if ($buscar_id === '') {
-            // Si el campo de búsqueda está vacío, traer todos los registros
-            $query = "SELECT * FROM control_aceites";
-            $result = $conn->query($query);
-        } else {
-            // Si hay un valor de búsqueda, realizar una consulta filtrada
-            $query = "SELECT * FROM control_aceites WHERE $buscar_opc = ?";
-            $stmt = $conn->prepare($query);
-
-            // Detectar tipo de dato
-            if ($buscar_opc === 'id' || $buscar_opc === 'Moto_Num') {
-                $tipo_param = "i"; // Entero
-            } else {
-                $tipo_param = "s"; // Cadena (Fecha)
-            }
-
-            $stmt->bind_param($tipo_param, $buscar_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-        }
-    } else {
-      $query = "SELECT * FROM control_aceites";
-      $result = $conn->query($query); 
-    }
-} else {
-    // Si no hay selección de opciones, mostrar todos los registros
-  
-}
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -91,12 +51,12 @@ if (isset($_GET['opciones'])) {
                                         <input type="date" id="fecha" name="fecha" class="form-control mb-3">
                                 
                                         
-                                        <input type="number" id="Aceites" name="Aceites" value="1" placeholder="NUMERO" class="form-control mb-3">
+                                        <input type="number" id="aceites" name="aceites" value="1" placeholder="NUMERO" class="form-control mb-3">
                                         
                                         
                                         <input type="text" id="Num_moto" name="Num_Moto" placeholder="MOTO" class="form-control mb-3">
                                         
-                                        <input type="submit" value="AGREGAR" class="btn btn-outline-dark">
+                                        <button id="btnAgregar" value="AGREGAR" class="btn btn-outline-danger">AGREGAR</button>
                     </div>
                     
                     </form>
@@ -108,16 +68,16 @@ if (isset($_GET['opciones'])) {
                                 <h4 class="text-white m-0" >INGRESAR ACEITES</h4>
                             </article>
                             <div class="container text-center m-3">
-                        <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES" class="form-control mb-3">
-                        <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" class="form-control mb-3">
-                        <input type="submit" value="INGRESAR ACEITES" id="ing_Aceites" name="ing_Aceites" class="btn btn-outline-dark">
+                        <input type="number" name="agregarDatos" id="agregarDatos" placeholder="ACEITES" class="form-control mb-3">
+                        <input type="text" name="agregarFolio" id="agregarFolio" placeholder="FOLIO" class="form-control mb-3">
+                        <button  value="ingresarAceites" id="btnAgregarDatos" name="btnAgregarDatos" class="btn btn-outline-dark">INGRESAR ACEITES</button>
                             </div>
                     </form>
                    </div>
 
 
                     <div class="forms d-none">
-                                <form method="GET" class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
+                                <form class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
                           <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
                                 <h4 class="text-white m-0" >BUSCAR POR</h4>
                             </article>
@@ -154,9 +114,9 @@ if (isset($_GET['opciones'])) {
                 <div class="row vh-100">
                         <article class="bg-light text-center p-0">
                         <h1 >Aceites Disponibles</h1>   
-                        <div class="container-fluid bg-danger">
+                        <div class="container-fluid border bg-danger">
                             
-                        <h1 id="aceites" class="text-white"></h1>
+                        <h1 id="aceites_stock" class="text-white">asd</h1>
                         
                         </div>
                     
@@ -194,6 +154,7 @@ if (isset($_GET['opciones'])) {
 <script src="js/index.js"></script>
 <script src="js/mandar_datos.js"></script>
 <script src="js/acciones.js"></script>
+<script src="js/agregar_Datos.js"></script>
 <style>
     .table-responsive::-webkit-scrollbar {
         width: 8px; /* Ancho del scroll */

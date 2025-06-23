@@ -1,19 +1,24 @@
 <?php
+
+use PhpOffice\PhpSpreadsheet\Calculation\Information\Value;
+
 session_start(); // Inicia la sesión
 
 require 'conexion.php';
 require 'aceites_Disponibles.php';
 require '../excel/datosExcel.php';
 
+$value=json_decode(file_get_contents("php://input"), true);
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fecha = $_POST['fecha'];
-    $num_moto = $_POST['Num_Moto'];
-    $aceites = $_POST['Aceites'];
+if ($value[3]==="AGREGAR") {
+    echo json_encode($value[0]);
+    $fecha = $value[2];
+    $num_moto = $value[1];
+    $aceites = $value[0];
     $Precio= 95;
     $formulaR = $aceites_Stock - $aceites;
-    agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock, $Precio);
+    //agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock, $Precio);
     
 }
 
@@ -43,17 +48,17 @@ function agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_S
         if ($conn->query($sql) === TRUE) {
             if ($conn->query($sqlIngresar)) {
                 datosExcel();
-                $_SESSION['mensaje'] = "Datos guardados correctamente.";
+                //$_SESSION['mensaje'] = "Datos guardados correctamente.";
                 header("Location: /AceitesSufa/index.php");
                 exit;
             }
         } else {
-            $_SESSION['mensaje'] = "Error al guardar los datos.";
+            //$_SESSION['mensaje'] = "Error al guardar los datos.";
             header("Location: /AceitesSufa/index.php");
             exit;
         }
     } else {
-        $_SESSION['mensaje'] = "Aceites insuficientes.";
+       // $_SESSION['mensaje'] = "Aceites insuficientes.";
         header("Location: /AceitesSufa/index.php");
         exit;
     }

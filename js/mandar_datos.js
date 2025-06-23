@@ -1,6 +1,8 @@
 let select= document.getElementById('selectF');
 let datosR ={};
 let control_aceites=['id','Fecha','Moto_Num','Cant_Aceites','folio'];
+
+
 select.addEventListener('change', function(){
     let value=select.value;
     let id=select.id;

@@ -2,8 +2,9 @@
 require "conexion.php";
 $numIngreso=0;
 $sqlA="SELECT Cant_Aceites FROM aceites_Stock ORDER BY id DESC LIMIT 1";
-
 $resultA=$conn->query($sqlA);
+
+
 
 
 if($resultA && $resultA->num_rows>0){
@@ -14,35 +15,16 @@ $aceites_Stock=$row['Cant_Aceites'];
     $aceites_Stock=0;
 }
 
+$value=json_decode(file_get_contents("php://input"), true);
+
+
+json_encode($value["btn"]);
 
 
 
 
-if(isset($_GET['ing_Aceites'])){
-    if(isset($_GET['ingresoAceites'])){
-        $numIngreso=(int)$_GET['ingresoAceites'];
-        $folio=$_GET['ingresoFolio'];
-        $fechaHoy=date("Y-m-d");
-        echo $fechaHoy;
-        $formulaM=$numIngreso+$aceites_Stock;
-        $sqlIngresar="INSERT INTO aceites_Stock(Cant_Aceites, Fecha_Aceites, Entrada, Salida) VALUES($formulaM, '$fechaHoy',$numIngreso,0 )";
-        $sqlInforme="INSERT INTO informe (inicio, folio) VALUES('$fechaHoy', '$folio')";
-        if($conn->query($sqlIngresar) === TRUE){
-            if($conn->query($sqlInforme)){
-                echo "Datos guardados correctamente.";
-            header("Location: /AceitesSufa/index.php");
-            exit;
-            }
-        }
-        
-        echo "<h1>". $numIngreso."</h1>";
-        echo "<h1>".$aceites_Stock."</h1>";
+    
 
-        
-        
-        
-    }
-}
 
 
 
