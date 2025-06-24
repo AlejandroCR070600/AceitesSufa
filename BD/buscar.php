@@ -4,7 +4,7 @@ $variable1="Fecha";
 $variable2="2025-01-12";
 $sql="SELECT * from control_aceites where ?=?";
 $stmt=$conn->prepare($sql);
-$stmt->bind_param("ss",$variable1);
+$stmt->bind_param("ss", $variable1,$variable2);
 $stmt->execute();
 $result=$stmt->get_result();
 
