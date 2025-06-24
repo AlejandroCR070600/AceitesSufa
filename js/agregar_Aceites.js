@@ -1,12 +1,12 @@
 let btnAgregarDatos=document.getElementById("btnAgregarDatos");
 btnAgregarDatos.addEventListener('click',function(event){
-event.preventDefault();
+
 
 let aceites=document.getElementById('agregarDatos').value;
 let folio=document.getElementById('agregarFolio').value;
 let btn=btnAgregarDatos.value;
 
-let datos={aceites,folio, btn};
+let datos=[aceites,folio, btn];
 
 
 fetch("BD/aceites_Disponibles.php",{
@@ -18,9 +18,11 @@ fetch("BD/aceites_Disponibles.php",{
 })
 .then(res=>res.text())
 .then(data=>{
-console.log(data);
+let h1=document.getElementById("aceites_stock");
+h1.textContent="10";
 })
 
 
 
 });
+

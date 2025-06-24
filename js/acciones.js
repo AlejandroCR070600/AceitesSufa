@@ -33,8 +33,7 @@ event.preventDefault();
   })
   
 
-console.log(aceites);
-console.log(num_Moto);
+
 
 });
 
