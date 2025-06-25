@@ -63,14 +63,18 @@ date_default_timezone_set('America/Mexico_City');
 
                        </div>
                    <div class="forms d-none">
-                     <form  class="  d-flex  flex-column align-items-center bg-light  rounded-4  shadow">
+
+                     <form action="BD/aceites_Disponibles.php" class="  d-flex  flex-column align-items-center bg-light  rounded-4  shadow">
+
                           <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
                                 <h4 class="text-white m-0" >INGRESAR ACEITES</h4>
                             </article>
                             <div class="container text-center m-3">
+
                         <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES" class="form-control mb-3">
                         <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" class="form-control mb-3">
-                        <button value="ingresarAceite" id="btnAgregarDatos" name="btnAgregarDatos" class="btn btn-outline-dark">INGRESAR</button>
+                        <button type="button" value="ingresarAceites" id="btnAgregarDatos" name="btnAgregarDatos" class="btn btn-outline-dark">INGRESAR ACEITES</button>
+
                             </div>
                     </form>
                    </div>
@@ -95,13 +99,13 @@ date_default_timezone_set('America/Mexico_City');
                        
                 <div class="forms d-none">
     
-                    <form method="POST" action="pdf/generador_PDF.php" class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
+                    <form  class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
                         <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
                                 <h4 class="text-white m-0" >INFORME</h4>
                             </article>
                         <div class="container text-center m-3">
                         <input id="select_Informe" name="select_Informe" type="DATE" class="form-control mb-3">
-                        <input type="submit" name="submitInforme" value="DESCARGAR" class="btn btn-outline-dark">
+                        <button name="submitInforme" value="DESCARGAR" class="btn btn-outline-dark"></button>
                         </div>
                     </form>
                 </div>
@@ -111,7 +115,7 @@ date_default_timezone_set('America/Mexico_City');
             </header>
             <section class="col-md-6 ">
 
-                <div class="row vh-100">
+                <div class="row vh-100 align-items-start bg-light">
                         <article class="bg-light text-center p-0">
                         <h1 >Aceites Disponibles</h1>   
                         <div class="container-fluid border bg-danger">
@@ -130,7 +134,7 @@ date_default_timezone_set('America/Mexico_City');
                     </article>
 
                 
-                    <article class="table-responsive col-sm-10  col-md-12 shadow bg-light  border">
+                    <article class="table-responsive col-sm-10  col-md-12 shadow bg-light  border ">
                         <table class="table table-light  table-hover ">
                             <thead>
                                 <tr>
@@ -154,7 +158,7 @@ date_default_timezone_set('America/Mexico_City');
 <script src="js/index.js"></script>
 <script src="js/mandar_datos.js"></script>
 <script src="js/acciones.js"></script>
-<script src="js/agregar_Datos.js"></script>
+<script src="js/agregar_Aceite.js"></script>
 <style>
     .table-responsive::-webkit-scrollbar {
         width: 8px; /* Ancho del scroll */

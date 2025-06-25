@@ -2,23 +2,35 @@
 
 use PhpOffice\PhpSpreadsheet\Calculation\Information\Value;
 
-session_start(); // Inicia la sesión
+
 
 require 'conexion.php';
-require 'aceites_Disponibles.php';
-require '../excel/datosExcel.php';
 
+require '../excel/datosExcel.php';
+$sqlA="SELECT Cant_Aceites FROM aceites_Stock ORDER BY id DESC LIMIT 1";
+$resultA=$conn->query($sqlA);
+
+
+
+
+if($resultA && $resultA->num_rows>0){
+$row= $resultA->fetch_assoc();
+$aceites_Stock=$row['Cant_Aceites'];
+
+}else{
+    $aceites_Stock=0;
+}
 $value=json_decode(file_get_contents("php://input"), true);
 
 
 if ($value[3]==="AGREGAR") {
-    echo json_encode($value[0]);
+    
     $fecha = $value[2];
     $num_moto = $value[1];
     $aceites = $value[0];
     $Precio= 95;
     $formulaR = $aceites_Stock - $aceites;
-    //agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock, $Precio);
+    agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock, $Precio);
     
 }
 
@@ -48,9 +60,7 @@ function agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_S
         if ($conn->query($sql) === TRUE) {
             if ($conn->query($sqlIngresar)) {
                 datosExcel();
-                //$_SESSION['mensaje'] = "Datos guardados correctamente.";
-                header("Location: /AceitesSufa/index.php");
-                exit;
+           
             }
         } else {
             //$_SESSION['mensaje'] = "Error al guardar los datos.";

@@ -2,31 +2,40 @@ function mostrarFormulario(number) {
   let forms = document.querySelectorAll('.forms');
 
   forms.forEach(function(form, i) {
-    console.log(number);
+    
     form.classList.add('d-none'); // Oculta todos
     if (i === number-1) {
       form.classList.remove('d-none'); // Muestra solo uno
     }
   });
 }
+//--------------------------------- ENTREGAR ACEITES----------------------------------------------------
+let btnAgregar=document.getElementById("btnAgregar");
+btnAgregar.addEventListener('click',function(event){
 
-
-let btnBuscar=document.getElementById("btnBuscar");
-btnBuscar.addEventListener('click', function(event){
-event.preventDefault()
-  
-  buscar();
-})
-
-
-function buscar(){
-  let selectOpciones=document.getElementById('opciones');
-  let inputBuscar=document.getElementById('buscar');
-    console.log( "holias") ;
-  console.log( selectOpciones.value) ;
-  console.log( inputBuscar.value) ;
-
+  let aceites=document.getElementById('aceites').value;
+  let num_Moto=document.getElementById('Num_moto').value;
+  let fecha=document.getElementById('fecha').value;
+  btn=btnAgregar.value
+  datos=[aceites,num_Moto, fecha,btn];
   
 
+  fetch("BD/entregar_Aceite.php",{
+    method:"POST",
+    headers:{
+      "Content-Type" : "application/json"
+    },
+    body: JSON.stringify(datos)
+  })
+  .then(res=> res.json())
+  .then(data=>{
+    console.log(data);
+  })
+  
 
-}
+
+
+});
+
+
+

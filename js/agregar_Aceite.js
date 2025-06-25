@@ -1,15 +1,15 @@
 let btnAgregarDatos=document.getElementById("btnAgregarDatos");
 btnAgregarDatos.addEventListener('click',function(event){
-event.preventDefault();
+
 
 let aceites=document.getElementById('ingresoAceites').value;
 let folio=document.getElementById('ingresoFolio').value;
 let btn=btnAgregarDatos.value;
 
-let datos={aceites,folio, btn};
+let datos=[aceites,folio, btn];
 
 
- fetch("BD/aceites_Disponibles.php",{
+ fetch("BD/ingresar_Aceites.php",{
         method:"POST",
         headers: {
             "Content-Type": "application/json"
@@ -18,9 +18,11 @@ let datos={aceites,folio, btn};
 })
 .then(res=> res.json())
 .then(data=>{
-console.log(data);
+let h1=document.getElementById("aceites_stock");
+h1.textContent="10";
 })
 
 
 
 });
+
