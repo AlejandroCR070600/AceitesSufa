@@ -12,7 +12,7 @@ function mostrarFormulario(number) {
 //--------------------------------- ENTREGAR ACEITES----------------------------------------------------
 let btnAgregar=document.getElementById("btnAgregar");
 btnAgregar.addEventListener('click',function(event){
-
+  event.preventDefault();
   let aceites=document.getElementById('aceites').value;
   let num_Moto=document.getElementById('Num_moto').value;
   let fecha=document.getElementById('fecha').value;
