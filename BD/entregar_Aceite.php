@@ -1,12 +1,11 @@
 <?php
 
 use PhpOffice\PhpSpreadsheet\Calculation\Information\Value;
-
-
-
 require 'conexion.php';
-
 require '../excel/datosExcel.php';
+
+header("Content-Type: application/json");
+
 $sqlA="SELECT Cant_Aceites FROM aceites_Stock ORDER BY id DESC LIMIT 1";
 $resultA=$conn->query($sqlA);
 
@@ -23,15 +22,38 @@ $aceites_Stock=$row['Cant_Aceites'];
 $value=json_decode(file_get_contents("php://input"), true);
 
 
-if ($value[3]==="AGREGAR") {
+if ($value[0]==="vacio") {
+
+    $datoJS=["mensaje" => "No se ingreso nada en el campo de ACEITES"];
+    echo json_encode($datoJS);
+    exit;
     
-    $fecha = $value[2];
-    $num_moto = $value[1];
-    $aceites = $value[0];
-    $Precio= 95;
-    $formulaR = $aceites_Stock - $aceites;
-    agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock, $Precio);
-    
+}else{
+    if($value[1]==="vacio"){
+
+        $datoJS=["mensaje" => "No se ingreso nada en el campo de NUMERO DE MOTO"];
+        echo json_encode($datoJS);
+        exit;
+
+    }else{
+        if($value[2]==="vacio"){
+
+            $datoJS=["mensaje" => "No se ingreso nada en el campo de Fecha"];
+            echo json_encode($datoJS);
+            exit;
+
+        }else{
+
+            $fecha = $value[2];
+            $num_moto = $value[1];
+            $aceites = $value[0];
+            $Precio= 95;
+            $formulaR = $aceites_Stock - $aceites;
+         
+            agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_Stock, $Precio);
+        }
+    }
+
 }
 
 function tablaInforme($conn) {
@@ -55,22 +77,29 @@ function agregar_datos($fecha, $num_moto, $aceites, $formulaR, $conn, $aceites_S
         $folio=$tablaInforme['folio'];
         $sql = "INSERT INTO control_aceites (Fecha, Moto_Num, Cant_Aceites, id_Informe, precio , folio) VALUES ('$fecha', $num_moto, $aceites, $id_Informe, $Precio, '$folio')";
         $sqlIngresar = "INSERT INTO aceites_Stock (Cant_Aceites, Fecha_Aceites, Entrada, Salida) VALUES ($formulaR, '$fecha', 0, $aceites)";
-        
+        $datoJS=[];
+       
 
-        if ($conn->query($sql) === TRUE) {
+        if ($conn->query($sql)) {
             if ($conn->query($sqlIngresar)) {
-                datosExcel();
-           
+                $mensajeExcel=datosExcel();
+               // al final del archivo:
+               $datoJS=["mensaje" => "SE AGREGO CORRECTAMENTE", "excel"=>$mensajeExcel];
+                echo json_encode($datoJS);
+                
+
             }
         } else {
-            //$_SESSION['mensaje'] = "Error al guardar los datos.";
-            header("Location: /AceitesSufa/index.php");
-            exit;
+            $datoJS=["mensaje" => "ERROR AL GUARDAR LOS DATOS"];
+// al final del archivo:
+                echo json_encode($datoJS);
+
         }
     } else {
-       // $_SESSION['mensaje'] = "Aceites insuficientes.";
-        header("Location: /AceitesSufa/index.php");
-        exit;
+        $datoJS=["mensaje" => "ACEITES INSUFICIENTES"];
+              // al final del archivo:
+                echo json_encode($datoJS);
+
     }
 }
 ?>

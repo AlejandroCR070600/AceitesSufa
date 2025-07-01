@@ -1,4 +1,8 @@
 <?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require '../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -15,8 +19,8 @@ function datosExcel(){
     global $conn;
     global $nombreArchivo;
 if(!file_exists($nombreArchivo)){
-    die("El archivo $nombreArchivo no existe");
-}
+    return "NO SE ENCONTRO EL ARCHIVO $nombreArchivo";
+}else{
 //obtiene el ultimo valor de la fila id en excel
 $spreadsheet = IOFactory::load($nombreArchivo);
 $sheet = $spreadsheet->getActiveSheet();
@@ -24,13 +28,15 @@ $ultimaFila = $sheet->getHighestRow();
 $id2 = $sheet->getCell('A' . $ultimaFila)->getValue();
 
 
-$sql=$sqlA="SELECT id FROM control_aceites ORDER BY id DESC LIMIT 1";
+$sql="SELECT id FROM control_aceites ORDER BY id DESC LIMIT 1";
 $result=$conn->query($sql);
 
 if($result->num_rows>0){
     $row=$result->fetch_assoc();
         $id1=$row['id'];
-        validarID($id1, $id2);
+        return validarID($id1, $id2);
+    
+}
 }
 }
 
@@ -39,9 +45,12 @@ if($result->num_rows>0){
 
 function validarID($id1, $id2){
 if($id1!=$id2){
-    agregarDatosExcel();
+    return agregarDatosExcel();
+    
 }else{
-    echo 'no puede agregar datos, ya que el ultimo id es igual al id proporcionado';
+    return "NO PUEDE AGREGAR DATOS, YA QUE EL ULTIMO ID ES IGUAL AL ID PROPORCIONADO";
+    
+    
 }
 }
 function obtenerDatosExcel(){
@@ -60,7 +69,8 @@ function obtenerDatosExcel(){
         }
         $dataFromExcel[]=$rowData;
     }
-    var_dump($dataFromExcel);
+    
+    exit;
 }
 
 function obtenerBaseDatos(){
@@ -75,6 +85,7 @@ if($result->num_rows>0){
     }
 }
 return $dataFromDatabase;
+
 }
 
 
@@ -127,6 +138,7 @@ foreach ($dataFromDatabase as $row) {
 $writer = new Xlsx($spreadsheet);
 $writer->save($nombreArchivo);
 agregarConsultaExcel();
+
 }
 
 
@@ -157,10 +169,15 @@ if($result->num_rows>0){
 
     $writer=new Xlsx($spreadsheet);
     $writer->save($nombreArchivo);
-    echo"los datos se guardaron correctamente";
+    return "DATOS AGREGADOS A EXCEL";
+    
+    
 
 }else{
-    echo"no hay datos en la base de datos";
+    return "NO HAY DATOS EN LA BASE DE DATOS";
+    
+
+    
 }
 }
 function agregarConsultaExcel() {
@@ -189,8 +206,13 @@ function agregarConsultaExcel() {
         // Guardar el archivo Excel actualizado
         $writer = new Xlsx($spreadsheet);
         $writer->save($nombreArchivo);
+
+        return "DATOS AGREGADOS CORRECTAMENTE";
+        
     } else {
-        echo "No hay datos para la consulta.";
+        return  "NO HAY DATOS PARA LA CONSULTA";
+        
+        
     }
 }
 

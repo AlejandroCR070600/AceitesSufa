@@ -1,9 +1,3 @@
-<?php 
-require 'BD/conexion.php';
-
-date_default_timezone_set('America/Mexico_City');
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,148 +15,147 @@ date_default_timezone_set('America/Mexico_City');
 
 </head>
 
-<body class="bg-secondary">
-    
+<body class="bg-light">
+
    <div class="container-fluid">
-        <div class="row align-items-center justify-content-around">
+        <div class="row ">
 
-            <header class="col-md-3 col-sm-12 d-flex flex-column   p-0  vh-100">
+            <header class="col-md-6 col-sm-12 d-flex flex-column bg-secondary p-0  vh-100 border border-2 border-black">
                          
-  <div class="btn-group" role="group" aria-label="Basic outlined example">
-                     <button class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(1)">Entregar</button>
-                   <button class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(2)" >Agregar</button>
-                 <button class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(3)">Buscar</button>
-  <button type="button" class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(4)">Informe</button>
-</div>
+                <div class="btn-group groupBtn" role="group" aria-label="Basic outlined example">
+                        <button class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(1)">Entregar</button>
+                        <button class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(2)" >Agregar</button>
+                        <button class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(3)">Buscar</button>
+                        <button type="button" class="btn border-0 btn-outline-danger text-black rounded-0" onclick="mostrarFormulario(4)">Informe</button>
+                </div>
 
-             
-                
-                    <div class="d-flex align-items-center justify-content-center  vh-100 ">
+                <div class="d-flex align-items-center justify-content-center bg-secondary vh-100 ">
 
-                       <div class="forms ">
-                         <form class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
+                    <div class="forms">
+                        <form class="  d-flex  flex-column align-items-center bg-light rounded-4 border  shadow-sm">
                             <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
                                 <h4 class="text-white m-0" >ENTREGAR ACEITE</h4>
                             </article>
-
-                
-                    <div class="container text-center m-3">
-                        
-                                        <input type="date" id="fecha" name="fecha" class="form-control mb-3">
+                            <div class="container text-center m-3">
                                 
-                                        
-                                        <input type="number" id="aceites" name="aceites" value="1" placeholder="NUMERO" class="form-control mb-3">
-                                        
-                                        
-                                        <input type="text" id="Num_moto" name="Num_Moto" placeholder="MOTO" class="form-control mb-3">
-                                        
-                                        <button id="btnAgregar" value="AGREGAR" class="btn btn-outline-danger">AGREGAR</button>
-                    </div>
+                                <input type="date" id="fecha" name="fecha" class="form-control mb-3" require>
+                                <input type="number" id="aceites" name="aceites" value="1" placeholder="NUMERO" class="form-control mb-3" require>
+                                <input type="text" id="Num_moto" name="Num_Moto" placeholder="MOTO" class="form-control mb-3" require>
+                                                
+                                <button id="btnAgregar" value="AGREGAR" class="btn btn-outline-danger">AGREGAR</button>
+                            </div>
                     
-                    </form>
+                        </form>
 
-                       </div>
+                    </div>
                    <div class="forms d-none">
 
-                     <form  class="  d-flex  flex-column align-items-center bg-light  rounded-4  shadow">
+                        <form  class="  d-flex  flex-column align-items-center bg-light  rounded-4  shadow-sm">
 
-                          <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
+                            <article class="container-fluid text-center bg-danger  m-3 mt-4">
                                 <h4 class="text-white m-0" >INGRESAR ACEITES</h4>
                             </article>
                             <div class="container text-center m-3">
 
-                        <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES" class="form-control mb-3">
-                        <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" class="form-control mb-3">
-                        <button type="button" value="ingresarAceites" id="btnAgregarDatos" name="btnAgregarDatos" class="btn btn-outline-dark">INGRESAR ACEITES</button>
+                                <input type="number" name="ingresoAceites" id="ingresoAceites" placeholder="ACEITES" class="form-control mb-3">
+                                <input type="text" name="ingresoFolio" id="ingresoFolio" placeholder="FOLIO" class="form-control mb-3">
+                                <button type="button" value="ingresarAceites" id="btnAgregarDatos" name="btnAgregarDatos" class="btn btn-outline-dark">INGRESAR ACEITES</button>
 
                             </div>
-                    </form>
+                        </form>
                    </div>
 
 
                     <div class="forms d-none">
-                                <form class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
-                          <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
-                                <h4 class="text-white m-0" >BUSCAR POR</h4>
+                        <form class="  d-flex  flex-column align-items-center bg-light rounded-4 shadow-sm">
+                            <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
+                                    <h4 class="text-white m-0" >BUSCAR POR</h4>
                             </article>
                             <div class="container text-center m-3">
-                        <select name="opciones" id="opciones" required class="form-control mb-3">
-                            <option value="Fecha" >fecha</option>
-                            <option value="Moto_Num">Moto</option>
-                            <option value="id">folio</option>
-                        </select>
-                        <input type="text" id="buscar" name="buscar" class="form-control mb-3">
-                        <button id="btnBuscar" value="buscar" class="btn btn-outline-dark" >BUSCAR</button>
+
+                                <select name="opciones" id="opciones" required class="form-control mb-3">
+                                    <option value="Fecha" >fecha</option>
+                                    <option value="Moto_Num">Moto</option>
+                                    <option value="folio">folio</option>
+                                </select>
+
+                                <input type="text" id="buscar" name="buscar" class="form-control mb-3">
+                                <button id="btnBuscar" value="buscar" class="btn btn-outline-dark" >BUSCAR</button>
                             </div>
-                    </form>
+                        </form>
                     </div>
                        
-                <div class="forms d-none">
-    
-                    <form  class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow">
-                        <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
-                                <h4 class="text-white m-0" >INFORME</h4>
-                            </article>
-                        <div class="container text-center m-3">
-                        <input id="select_Informe" name="select_Informe" type="DATE" class="form-control mb-3">
-                        <button name="submitInforme" value="DESCARGAR" class="btn btn-outline-dark"></button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="forms d-none">
+        
+                        <form  class="  d-flex  flex-column align-items-center bg-light rounded-4  shadow-sm">
+                            <article class="container-fluid text-center bg-danger bg-gradiant m-3 mt-4">
+                                    <h4 class="text-white m-0" >INFORME</h4>
+                                </article>
+                            <div class="container text-center m-3">
+                                <input id="download_Folio" name="download_Folio" placeholder="FOLIO" type="text" class="form-control mb-3">
+                                <button id="btnDownload" name="download" value="DOWNLOAD"  class="btn btn-outline-dark">DESCARGAR</button>
+                            </div>
+                        </form>
+                    </div>
                     
-                   </div>
+                </div>
                 
             </header>
-            <section class="dflex flex-column col-md-6 vh-100 bg-light">
+            <section class="col-md-6 col-sm-12 vh-100 bg-light  border border-2 border-warning  p-0">
 
-                        <article class="container-fluid bg-light text-center p-0">
-                        <h2 >Aceites Disponibles</h2>   
-                        <div class="container-fluid border bg-danger shadow mb-3">
-                            
-                        <h1 id="aceites_stock" class="text-white">asd</h1>
                         
-                        </div>
+                <article class="text-center p-0">
+                    <h2 >Aceites Disponibles</h2>   
+                    <div class="bg-danger shadow-sm mb-3">
+                            
+                        <h1 id="aceites_stock" class="text-white"></h1>
+                        
+                    </div>
                     
-                        <div class=" container mb-3">
-                           <div class="d-flex justify-content-center ">
+                    <div class=" container ">
+                        <div class="d-flex justify-content-center pb-3">
                              <h2 class="">FOLIO: </h2>
-                            <select id="selectF" name="selectF" class="p-0 btn  btn-outline-dark"></select>
-                           </div>
+                            <select id="selectF" name="selectF" class="btn border-0 btn-outline-danger text-black rounded-0  "></select>
                         </div>
+                    </div>
                     
-                    </article>
+                </article>
 
                 
-                    <article class="col-sm-10  col-md-12 shadow bg-light  border " style="height:450px; overflow:auto;">
+                <article class="" style="height:450px; overflow:auto;">
 
-                       <div class="table-responsive ">
-                         <table class="table table-light  table-hover ">
-                            <thead>
+                    <div class="  ">
+                        <table class="table table-hover bg-transparent">
+                            <thead class="">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>FECHA</th>
-                                    <th>MOTO</th>
-                                    <th>ACEITES</th>
-                                    <th>FOLIO</th>
-                                    <th>ACCIONES</th>
+                                    <th class="bg-danger text-white">ID</th>
+                                    <th class="bg-danger text-white">FECHA</th>
+                                    <th class="bg-danger text-white">MOTO</th>
+                                    <th class="bg-danger text-white">ACEITES</th>
+                                    <th class="bg-danger text-white">FOLIO</th>
+                                    <th class="bg-danger text-white">ACCIONES</th>
                                 </tr>
                             </thead>
-                            <tbody id="tbody">
+                            <tbody id="tbody" class="">
                                 
                             </tbody>
                         </table> 
-                       </div>
-                    </article>
+                       
+                    </div>
+                    
+                </article>
                 
+                        
             </section> 
         </div>
    </div>
             
-<script src="js/index.js"></script>
-<script src="js/mandar_datos.js"></script>
-<script src="js/acciones.js"></script>
-<script src="js/agregar_Aceite.js"></script>
+<script src="js/mostrar_Datos.js"></script>
+<script src="js/mandar_Datos.js"></script>
+<script src="js/entregar_Aceites.js"></script>
+<script src="js/ingresar_Aceites.js"></script>
 <script src="js/buscar.js"></script>
+<script src="js/download_Informe.js"></script>
 <style>
     .table-responsive::-webkit-scrollbar {
         width: 8px; /* Ancho del scroll */

@@ -6,6 +6,9 @@ html,body{
   padding: 0;
   margin: 0;
 }
+button:hover{
+  color: #ffffff !important;
+}
 
 input[type='date']:focus,
 input[type='text']:focus,
@@ -15,9 +18,13 @@ input[type='number']:focus{
     background-color: #ffffff;
     box-shadow: 0 0 5px #dc3545;
 }
-select:hover{
-      outline: none; /* Quita el borde azul por defecto */
-    border: 2px solid #dc3545;
-    background-color: #ffffff;
-    box-shadow: 0 0 5px #dc3545;
+.btn:hover{
+color: #ffffff !important;
+}
+
+table.bg-transparent, 
+table.bg-transparent td {
+    background-color: transparent !important;
+    border: none !important;
+    
 }

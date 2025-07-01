@@ -16,7 +16,17 @@ btnAgregar.addEventListener('click',function(event){
   let aceites=document.getElementById('aceites').value;
   let num_Moto=document.getElementById('Num_moto').value;
   let fecha=document.getElementById('fecha').value;
-  btn=btnAgregar.value
+  let datos={};
+   if(!aceites){
+      aceites="vacio";
+   }
+  if(!fecha){
+    fecha="vacio";
+  }
+  if(!num_Moto){
+        num_Moto="vacio";
+      }
+    btn=btnAgregar.value;
   datos=[aceites,num_Moto, fecha,btn];
   
 
@@ -29,13 +39,21 @@ btnAgregar.addEventListener('click',function(event){
   })
   .then(res=> res.json())
   .then(data=>{
-    console.log(data);
-  })
+    console.log(data.mensaje);
+    
+
+    });
+    
+  
+
+  
+
+  });
   
 
 
 
-});
+
 
 
 

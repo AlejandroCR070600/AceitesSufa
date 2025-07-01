@@ -4,16 +4,14 @@ require "../BD/conexion.php"; // Archivo de conexión a la base de datos
 require('fpdf.php'); // Librería FPDF
 date_default_timezone_set('America/Mexico_City');
 
-$FechaInforme = date("Y-m-d"); // Fecha actual por defecto
+$input = json_decode(file_get_contents("php://input"), true);
+$folio = $input['folio'];
 
-if (isset($_POST['submitInforme']) && isset($_POST['select_Informe'])) {
-    $FechaInforme = $_POST['select_Informe']; // Fecha de inicio del informe
-}
 
-// 🔹 1️⃣ Obtener el ID del informe basado en la fecha de inicio
-$sqlInforme = "SELECT * FROM informe WHERE inicio = ?";
+// Obtener el ID del informe basado en la fecha de inicio
+$sqlInforme = "SELECT * FROM informe WHERE folio = ?";
 $stmtInforme = $conn->prepare($sqlInforme);
-$stmtInforme->bind_param('s', $FechaInforme);
+$stmtInforme->bind_param('s', $folio);
 $stmtInforme->execute();
 $resultInforme = $stmtInforme->get_result();
 
@@ -21,10 +19,13 @@ if ($resultInforme->num_rows > 0) {
     $informe = $resultInforme->fetch_assoc();
     $idInforme = $informe['id']; // Obtener el ID del informe
 } else {
-    die("No se encontró un informe con la fecha proporcionada.");
+ header("Content-Type: application/json");
+http_response_code(404);
+echo json_encode(["error" => "No se encontró un informe con la fecha proporcionada."]);
+exit;
 }
 
-// 🔹 2️⃣ Obtener datos de `control_aceites` filtrando por `id_Informe`
+// Obtener datos de `control_aceites` filtrando por `id_Informe`
 $sql = "SELECT Moto_Num, SUM(Cant_Aceites) AS Total_Aceites, SUM(precio) as Precio
         FROM control_aceites 
         WHERE id_Informe = ?
@@ -35,7 +36,7 @@ $stmt->bind_param('i', $idInforme);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// 🔹 3️⃣ Crear el PDF
+// Crear el PDF
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
@@ -78,7 +79,7 @@ if ($result->num_rows > 0) {
     $pdf->Output('D', 'Reporte_Vacio.pdf');
 }
 
-// 🔹 4️⃣ Cerrar conexiones
+// Cerrar conexiones
 $stmt->close();
 $stmtInforme->close();
 $conn->close();
